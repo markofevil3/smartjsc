@@ -29,5 +29,5 @@
 # sudo node app.js
 
 # ssh -i .ssh/bpquanpublic.pem ec2-user@ec2-175-41-185-47.ap-southeast-1.compute.amazonaws.com 'mongod --dbpath mongodb/data'
-mongod --dbpath mongodb/data >> production.log 2>&1 &
+mongod --dbpath ~/mongodb/data >> production.log 2>&1 &
 sudo node app.js >> production.log 2>&1 &
