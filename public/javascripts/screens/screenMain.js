@@ -279,6 +279,8 @@ function preloadImage(sources, folder, callback) {
       }
     }    
   } else {
-    callback('');
+    if (callback) {
+      callback('');
+    }
   }
 };
