@@ -1,0 +1,43 @@
+extends layout
+
+block content
+  div(id="user-screen", class="user-screens")
+    a(href="/logout")
+      div(id="close-button", class="close-button")
+        div(id="close-icon")
+    a(href="/changePassword?back=user")
+      div(id="change-password-button", class="change-password-button close-button")
+        div(id="lock-icon")
+    div(id="user-panel")
+      div(id="display-name")
+        span(style="font-size: 0.9em") Hello&nbsp;
+        span(style="font-weight: bold") #{displayName}!
+      br
+      - if (typeof(status) != 'undefined')
+        - if (status == 'success')
+          div(class="status", style="color: green") File upload success!
+        - if (status == 'error')
+          div(class="status", style="color: red") Error! Please retry.
+      form(action="uploadLecture", method="POST", enctype="multipart/form-data")
+        div(id="file-panel")
+          div(id="choose-file")
+            div(class="text") Attach files:
+            div(id='wrapper')
+              div(id="fake-text")
+              div(id="fake-button")
+                div(id="text") Browse
+              input(type="file", name="lectureFile", id="lectureFile")
+            div(class="clear")
+          div(id="note-wrapper")
+            div(class="text") File Note:
+            div(id="text-wrapper")
+              textarea(id="note", name="note")
+            div(class="clear")
+          div(id="buttons")
+            a(href="showFiles")
+              div(id="show-files-button")
+                div(id="text") Show files
+            input(type="submit", name="submit", id="submit", value="Done")
+            div(class="clear")
+          div(class="clear")
+          

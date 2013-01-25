@@ -1,0 +1,39 @@
+extends layout
+
+block content
+  div(id="show-file-screen", class="user-screens list-screens")
+    a(href="/logout")
+      div(id="close-button", class="close-button")
+        div(id="close-icon")
+    - if (typeof(error) != 'undefined')
+      div(id="error-display") #{error}
+        a(href="/user")
+          div(id="back-button", class="back-button")
+            div(id="text") Back
+    - else
+      div(id="file-panel")
+        div(id="label-panel")
+          div(id="file-name-label") File name
+          div(id="date-label") Date
+        div(id="wrapper")
+          div(id="file-table")
+            - each file in files
+              div(class="holder")
+                div(class="file-name")
+                  div(class="text") #{file.name}
+                  - if (downloadable)
+                    a(href="download?path=#{file.path}&fileName=#{file.name}")
+                      div(class="download-icon")
+                        div(class="icon")
+                div(class="upload-date")
+                  div(class="date-text") #{convertDate(file.uploadDate)}
+                div(class="clear")
+          div(class="clear")
+        - if (downloadable)
+          a(href="/admin")
+            div(id="back-button", class="back-button")
+              div(id="text") Back
+        - else
+          a(href="/user")
+            div(id="back-button", class="back-button")
+              div(id="text") Back

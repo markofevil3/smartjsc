@@ -1,0 +1,28 @@
+doctype 5
+html
+  head
+    title= title
+    <!-- Skin CSS file -->
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/skin.css">
+    <!-- Utility Dependencies -->
+    <script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+    <script src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
+    <!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+    <script src="http://yui.yahooapis.com/2.9.0/build/container/container_core-min.js"></script>
+    <script src="http://yui.yahooapis.com/2.9.0/build/menu/menu-min.js"></script>
+    <script src="http://yui.yahooapis.com/2.9.0/build/button/button-min.js"></script>
+    <!-- Source file for Rich Text Editor-->
+    <script src="http://yui.yahooapis.com/2.9.0/build/editor/editor-min.js"></script>
+    <!-- Source for Connection Manager (Required for yuiImageUploader) -->
+    <script src="http://yui.yahooapis.com/2.9.0/build/connection/connection-min.js"></script>
+    <script src="admin/yui-image-uploader.js"></script>
+    
+    
+    script(src="javascripts/admin/textEditor.js", type="text/javascript")
+  body(class="yui-skin-sam")
+    form(action="add", method="POST", enctype="multipart/form-data")
+      input(type="submit", id="submitForm", name="submitForm", value="submitForm")
+      textarea(name="msgpost", id="msgpost", cols="100", rows="30")
+    - if (returnValue)
+      != returnValue
+      

@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  div(id="create-account-screen", class="user-screens")
+    a(href="/logout")
+      div(id="close-button", class="close-button")
+        div(id="close-icon")
+    - if (typeof(error) != 'undefined')
+      div(id="error-display") #{error}
+        a(href="/admin")
+          div(id="back-button", class="back-button")
+            div(id="text") Back
+    - else
+      div(id="title") Create account
+      - if (typeof(warning) != 'undefined')
+        div(id="warning", class="notice-display") #{warning}
+      - if (typeof(status) != 'undefined')
+        div(id="status", class="notice-display") #{status}
+      div(id="form-panel")
+        form(action="createAccount", method="POST", enctype="multipart/form-data")
+          div(id="username-panel", class="input-panel")
+            div(class="text") Username:
+            div(class="input-text")
+              input(type="text", id="username", name="username")
+            div(class="clear")
+          div(id="password-panel", class="input-panel")
+            div(class="text") Password:
+            div(class="input-text")
+              input(type="password", id="password", name="password")
+            div(class="clear")
+          div(id="repeat-password-panel", class="input-panel")
+            div(class="text") Repeat Password:
+            div(class="input-text")
+              input(type="password", id="repeat-password", name="repeatPassword")
+            div(class="clear")
+          div(id="display-name-panel", class="input-panel")
+            div(class="text") Display Name:
+            div(class="input-text")
+              input(type="text", id="display-name", name="displayName")
+            div(class="clear")
+          div(id="bottom")
+            a(href="/admin")
+              div(id="back-button", class="back-button")
+                div(id="text") Back
+            div(id="submit-button")
+              input(type="submit", name="submit", value="Create")
+            div(class="clear")
+        
+      

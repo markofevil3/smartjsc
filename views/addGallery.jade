@@ -1,0 +1,60 @@
+extends layout
+
+block content
+  div(id="add-gallery-screen", class="user-screens list-screens")
+    a(href="/logout")
+      div(id="close-button", class="close-button")
+        div(id="close-icon")
+    a(href="/changePassword?back=admin")
+      div(id="change-password-button", class="change-password-button close-button")
+        div(id="lock-icon")
+    - if (typeof(error) != 'undefined')
+      div(id="error-display") #{error}
+        a(href="/logout")
+          div(id="back-button", class="back-button")
+            div(id="text") Back
+    - else
+      - if (typeof(warning) != 'undefined')
+        div(id="warning", class="notice-display") #{warning}
+      - if (typeof(status) != 'undefined')
+        div(id="status", class="notice-display") #{status}
+      div(id="form-panel")
+        form(action="addGallery", method="POST", enctype="multipart/form-data")
+          div(id="title-panel", class="input-panel")
+            div(class="text") Title:
+            div(class="input-text")
+              input(type="text", id="aticle-title", name="articleTitle")
+            div(class="clear")
+          div(id="type-panel", class="input-panel")
+            div(class="text") Gallery Type:
+            div(class="input-text")
+              select(id="articleType", name="articleType")
+                option(value="1") Gallery
+                option(value="2") Camping
+            div(class="clear")
+          - if (typeof(galleries) != 'undefined')
+            div(id="type-panel", class="input-panel")
+              div(class="text") Gallery List:
+              div(class="input-text")
+                select(id="chosenGallery", name="chosenGallery")
+                  option(value="null") Select Gallery
+                  - each gallery in galleries
+                    option(value="#{gallery._id}") #{gallery.title}
+              div(class="clear")
+          div(id="thumbnail-panel", class="input-panel")
+            div(class="text") Thumnail:
+            div(class="input-text")
+              input(type="file", name="articleThumbnail", id="article-thumbnail")
+            div(class="clear")
+          div(id="thumbnail-panel", class="input-panel")
+            div(class="text") Images:
+            div(class="input-text")
+              input(type="file", name="images", id="images", multiple)
+            div(class="clear")
+          div(id="bottom")
+            a(href="/admin")
+              div(id="back-button", class="back-button")
+                div(id="text") Back
+            div(id="submit-button")
+              input(type="submit", id="submitForm", name="submitForm", value="Submit")
+            div(class="clear")

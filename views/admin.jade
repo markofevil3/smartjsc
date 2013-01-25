@@ -1,0 +1,38 @@
+extends layout
+
+block content
+  div(id="admin-screen", class="user-screens list-screens")
+    a(href="/logout")
+      div(id="close-button", class="close-button")
+        div(id="close-icon")
+    a(href="/changePassword?back=admin")
+      div(id="change-password-button", class="change-password-button close-button")
+        div(id="lock-icon")
+    - if (typeof(error) != 'undefined')
+      div(id="error-display") #{error}
+        a(href="/logout")
+          div(id="back-button", class="back-button")
+            div(id="text") Back
+    - else
+      div(id="file-panel")
+        div(id="label-panel")
+          div(id="teacher-name-label") Teacher names
+        div(id="wrapper")
+          div(id="file-table")
+            - each teacher in teachers
+              div(class="holder")
+                a(href="showFiles?username=#{teacher.username}")
+                  div(class="teacher-name")
+                    div(class="text") #{teacher.displayName}
+                div(class="clear")
+          div(class="clear")
+        a(href="createAccount")
+          div(id="create-account", class="back-button")
+            div(id="text") Create Account
+        - if (superior)
+          a(href="addGallery")
+            div(id="add-gallery", class="back-button")
+              div(id="text") Add Gallery
+          a(href="addArticle")
+            div(id="add-article", class="back-button")
+              div(id="text") Add Article

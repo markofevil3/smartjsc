@@ -1,0 +1,545 @@
+@import 'reset.less';
+
+html,body {
+  margin:0;
+  padding:0;
+  height:100%;
+  width: 100%;
+/*  min-height: 50em;*/
+  min-width: 70em;
+}
+body {
+  font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background: url('../img/icons/background.jpg') no-repeat;
+  .background-size(100% 100%);
+}
+
+#user-screen {
+  
+}
+
+.change-password-button {
+  top: 2.7em !important;
+  
+  #lock-icon {
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0.25em;
+    position: relative;
+    background-image: url('../img/icons/lock.png');
+    .background-size(100% 100%);
+  }
+}
+
+.change-password-button:hover {
+  opacity: 0.7;
+}
+
+.close-button {
+  position: absolute;
+  background-color: #393939;
+  width: 2em;
+  height: 2em;
+  .rounded-corners(7px);
+  border: 1px solid #fff;
+  left: -2em;
+  top: 0.5em;
+  
+  #close-icon {
+    width: 1em;
+    height: 1em;
+    margin: 0.5em;
+    position: relative;
+    background-image: url('../img/icons/close-button.png');
+    .background-size(100% 100%);
+  }
+}
+
+.close-button:hover {
+  opacity: 0.7;
+}
+
+.list-screens {
+  
+  #error-display {
+    text-align: center;
+    color: red;
+    font-size: 1.2em;
+    position: relative;
+    top: 2em;
+    
+    #back-button {
+      position: relative;
+      float: none;
+      margin: auto;
+      margin-top: 1em;
+      width: 4em;
+    }
+  }
+  
+  #file-panel {
+    width: 80%;
+    height: 80%;
+    margin: auto;
+    top: 10%;
+    position: relative;
+    
+    #label-panel {
+      width: 100%;
+      color: #e9e9e9;
+      font-size: 1em;
+      
+      #file-name-label {
+        float: left;
+        width: 65%;
+        margin-left: 5%;
+      }
+    }
+    #wrapper {
+      border: 1px solid black;
+      .rounded-corners(7px);
+      height: 17em;
+      background-color: #e9e9e9;
+      margin-top: 2%;
+      color: #3d3d3d;
+      font-size: 1em;
+      overflow: scroll;
+      
+      .holder {
+        width: 100%;
+        border-bottom: 1px solid #cbcbcb;
+        height: 3em;
+        
+        .file-name {
+          float: left;
+          width: 62%;
+          height: 100%;
+          border-right: 1px solid #cbcbcb;
+          display: table;
+        }
+        .download-icon {
+          height: 100%;
+          width: 3em;
+          float: right;
+          position: relative;
+          
+          .icon {
+            .background-size(100% 100%);
+            background-image: url('../img/icons/download-icon.png');
+            width: 2em;
+            height: 2em;
+            margin: 0.5em;
+          }
+        }
+        .download-icon:hover {
+          opacity: 0.4;
+        }
+        .text {
+          position: relative;
+          display: table-cell;
+          vertical-align: middle;
+          padding: 2% 1.3em;
+        }
+        .date-text {
+          position: relative;
+          display: table-cell;
+          vertical-align: middle;
+          padding: 2%;
+        }
+        
+        .upload-date {
+          display: table;
+          float: left;
+          margin-left: 2%;
+          width: 32%;
+          height: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+}
+
+.back-button {
+  float: right;
+  background-color: #6f6f6f;
+  .rounded-corners(5px);
+  .box-shadow(0px 2px 3px 0px rgba(0,0,0,0.9));
+  margin-top: 0.5em;
+  
+  #text {
+    padding: 0.35em 0.8em;
+    color: #efefef;
+  }
+}
+
+#add-article-screen, #add-gallery-screen {
+  width: 50em;
+  height: 50em;
+  margin-top: -25em;
+  
+  #warning {
+    color: red;
+    width: 100%;
+    text-align: center;
+  }
+  #status {
+    color: green;
+    width: 100%;
+    text-align: center;
+  }
+  
+  #form-panel {
+    width: 94%;
+    margin: auto;
+    height: 98%;
+    overflow: scroll;
+    
+    .input-panel {
+      margin-bottom: 0.5em;
+
+      .text {
+        float: left;
+        margin-left: 0.7em;
+        padding: 0.3em;
+        color: #adadad;
+      }
+      .input-text {
+        float: right;
+        margin-right: 0.7em;
+      }
+      input {
+        .rounded-corners(4px);
+        padding: 0.3em 0;
+        width: 50em;
+      }
+      #articleShortDes {
+        width: 50em;
+        height: 10em;
+      }
+      #msgpost {
+        width: 50em;
+        height: 28em;
+      }
+    }
+    #bottom {
+      margin-top: 1em;
+      #back-button {
+        float: left;
+        position: relative;
+        left: 14em;
+        margin-top: 0;
+      }
+      #submit-button {
+        float: right;
+        margin-right: 0.7em;
+
+        input[type="submit"] {
+          background-color: #6f6f6f;
+          color: #fff;
+          .rounded-corners(4px);
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}
+
+.user-screens {
+  width: 35em;
+  height: 25em;
+  margin: 0 auto;
+  background-color: #393939;
+  top: 50%;
+  margin-top: -12.5em;
+  .rounded-corners(7px);
+  .box-shadow(0px 1px 7px 0px rgba(0,0,0,1));
+  position: relative;
+  
+  .status {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 1.3em;
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+  
+  #user-panel {
+    width: 85%;
+    margin: auto;
+    height: 80%;
+    top: 10%;
+    position: relative;
+    color: #e7e7e7;
+    
+    #display-name {
+      
+    }
+    
+    #file-panel {
+      margin-top: 1em;
+      
+      .text {
+        float: left;
+      }
+      #wrapper {
+        width: 23em;
+        height: 2em;
+        float: right;
+        position: relative;
+        
+        #fake-text {
+          width: 16em;
+          height: 100%;
+          background-color: #fff;
+          .rounded-corners(5px);
+          float: left;
+          color: #393939;
+          white-space: nowrap;
+          overflow: scroll;
+          line-height: 200%;
+        }
+         
+        #fake-button {
+          background-color: #b1b1b1;
+          .rounded-corners(5px);
+          height: 100%;
+          width: 5em;
+          font-size: 0.8em;
+          float: left;
+          margin-left: 1.5em;
+          display: table;
+          color: #606060;
+          .box-shadow(0px 2px 3px 0px rgba(0,0,0,0.9));
+          
+          #text {
+            display: table-cell;
+            vertical-align: middle;
+            text-align: center;
+          }
+        }
+        
+        #lectureFile {
+          opacity: 0;
+          right: 0;
+          position: absolute;
+        }
+      }
+      
+      #note-wrapper {
+        margin-top: 1em;
+        
+        #text-wrapper {
+          float: left;
+          margin-left: 2em;
+          .rounded-corners(5px);
+          width: 16em;
+          height: 12em;
+
+          textarea {
+            .rounded-corners(5px);
+            width: 100%;
+            height: 100%;
+            resize:none;
+            font-size: 1em;
+          }
+        }
+      }
+      #buttons {
+        width: 16.3em;
+        margin: auto;
+        margin-top: 1em;
+        
+        #show-files-button {
+          float: left;
+          background-color: #6f6f6f;
+          .rounded-corners(5px);
+          .box-shadow(0px 2px 3px 0px rgba(0,0,0,0.9));
+          margin-top: 0.1em;
+          margin-left: 5em;
+          
+          #text {
+            padding: 0.35em 0.5em;
+            color: #efefef;
+          }
+        }
+        input[type="submit"] {
+          .rounded-corners(5px);
+          font-size: 0.8em;
+          .box-shadow(0px 2px 3px 0px rgba(0,0,0,0.9));
+          padding: 0.4em 1em;
+          float: right;
+          color: #efefef;
+          background-color: #6f6f6f;
+        }
+      }
+    }
+  }
+}
+
+#admin-screen {
+  #teacher-name-label {
+    width: 100%;
+    margin-left: 5%;
+  }
+  #wrapper {
+    .holder {
+      height: 2em !important;
+      
+      .teacher-name {
+        width: 100%;
+        height: 100%;
+        display: table;
+      }
+    }
+  }
+  #create-account {
+    float: left;
+  }
+  #add-gallery {
+    margin-left: 1em;
+  }
+}
+
+#create-account-screen {
+  #error-display {
+    text-align: center;
+    color: red;
+    font-size: 1.2em;
+    position: relative;
+    top: 2em;
+    
+    #back-button {
+      position: relative;
+      float: none;
+      margin: auto;
+      margin-top: 1em;
+      width: 4em;
+    }
+  }
+  #title {
+    width: 64.5%;
+    margin: auto;
+    position: relative;
+    top: 2em;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-align: center;
+  }
+  .notice-display {
+    width: 64.5%;
+    margin: auto;
+    position: relative;
+    top: 3em;
+    text-align: center;
+    font-size: 1.2em;
+  }
+  #warning {
+    color: red;
+  }
+  #status {
+    color: green;
+  }
+  #form-panel {
+    width: 70%;
+    margin: 5em auto 0 auto;
+    
+    .input-panel {
+      margin-bottom: 0.5em;
+
+      .text {
+        float: left;
+        margin-left: 0.7em;
+        padding: 0.3em;
+        color: #adadad;
+      }
+      .input-text {
+        float: right;
+        margin-right: 0.7em;
+      }
+      input {
+        .rounded-corners(4px);
+        padding: 0.3em 0;
+        width: 16em;
+      }
+    }
+    #bottom {
+      margin-top: 1em;
+      #back-button {
+        float: left;
+        position: relative;
+        left: 14em;
+        margin-top: 0;
+      }
+      #submit-button {
+        float: right;
+        margin-right: 0.7em;
+
+        input[type="submit"] {
+          background-color: #6f6f6f;
+          color: #fff;
+          .rounded-corners(4px);
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}
+
+#login-screen {
+  width: 20em;
+  height: 8em;
+  margin: 0 auto;
+  background-color: #393939;
+  top: 50%;
+  margin-top: -8em;
+  .rounded-corners(7px);
+  .box-shadow(0px 1px 7px 0px rgba(0,0,0,1));
+  position: relative;
+  
+  .gap {
+    height: 1em;
+  }
+  .input-panel {
+    margin-bottom: 0.5em;
+    
+    .text {
+      float: left;
+      margin-left: 0.7em;
+      padding: 0.3em;
+      color: #adadad;
+    }
+    .input-text {
+      float: right;
+      margin-right: 0.7em;
+    }
+    input {
+      .rounded-corners(4px);
+      padding: 0.3em 0;
+      width: 16em;
+    }
+  }
+  #bottom {
+    
+    #submit-button {
+      float: right;
+      margin-right: 0.7em;
+      
+      input[type="submit"] {
+        background-color: #6f6f6f;
+        color: #fff;
+        .rounded-corners(4px);
+        font-size: 1em;
+      }
+    }
+    #error-display {
+      float: left;
+      margin-left: 1em;
+      color: red;
+      width: 10em;
+    }
+  }
+}

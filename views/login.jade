@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  div(id="login-screen")
+    a(href="/")
+      div(id="close-button", class="close-button")
+        div(id="close-icon")
+    div(id="login-panel")
+      form(action="login", method="post")
+        div(class="gap")
+        div(id="username-panel", class="input-panel")
+          div(class="text") User:
+          div(class="input-text")
+            input(type="text", id="username", name="username")
+          div(class="clear")
+        div(id="password-panel", class="input-panel")
+          div(class="text") Password:
+          div(class="input-text")
+            input(type="password", id="password", name="password")
+          div(class="clear")
+        div(id="bottom")
+          - if (typeof(error) != 'undefined')
+            div(id="error-display") #{error}
+          div(id="submit-button")
+            input(type="submit", name="submit", value="Login")

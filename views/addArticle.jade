@@ -1,0 +1,73 @@
+extends layout
+
+block textEditor
+  <!-- Skin CSS file -->
+  <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/skin.css">
+  <!-- Utility Dependencies -->
+  <script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+  <script src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
+  <!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+  <script src="http://yui.yahooapis.com/2.9.0/build/container/container_core-min.js"></script>
+  <script src="http://yui.yahooapis.com/2.9.0/build/menu/menu-min.js"></script>
+  <script src="http://yui.yahooapis.com/2.9.0/build/button/button-min.js"></script>
+  <!-- Source file for Rich Text Editor-->
+  <script src="http://yui.yahooapis.com/2.9.0/build/editor/editor-min.js"></script>
+  <!-- Source for Connection Manager (Required for yuiImageUploader) -->
+  <script src="http://yui.yahooapis.com/2.9.0/build/connection/connection-min.js"></script>
+  <script src="admin/yui-image-uploader.js"></script>
+  script(src="admin/textEditor.js", type="text/javascript")
+
+block content
+  div(id="add-article-screen", class="user-screens list-screens")
+    a(href="/logout")
+      div(id="close-button", class="close-button")
+        div(id="close-icon")
+    a(href="/changePassword?back=admin")
+      div(id="change-password-button", class="change-password-button close-button")
+        div(id="lock-icon")
+    - if (typeof(error) != 'undefined')
+      div(id="error-display") #{error}
+        a(href="/logout")
+          div(id="back-button", class="back-button")
+            div(id="text") Back
+    - else
+      - if (typeof(warning) != 'undefined')
+        div(id="warning", class="notice-display") #{warning}
+      - if (typeof(status) != 'undefined')
+        div(id="status", class="notice-display") #{status}
+      div(id="form-panel")
+        form(action="addArticle", method="POST", enctype="multipart/form-data")
+          div(id="title-panel", class="input-panel")
+            div(class="text") Title:
+            div(class="input-text")
+              input(type="text", id="aticle-title", name="articleTitle")
+            div(class="clear")
+          div(id="type-panel", class="input-panel")
+            div(class="text") Article Type:
+            div(class="input-text")
+              select(id="articleType", name="articleType")
+                option(value="1") Question
+                option(value="2") News
+            div(class="clear")
+          div(id="thumbnail-panel", class="input-panel")
+            div(class="text") Thumnail:
+            div(class="input-text")
+              input(type="file", name="articleThumbnail", id="article-thumbnail")
+            div(class="clear")
+          div(id="shortDes-panel", class="input-panel")
+            div(class="text") Short Description:
+            div(class="input-text")
+              textarea(id="articleShortDes", name="articleShortDest", class="input-panel")
+            div(class="clear")
+          div(id="fullDes-panel", class="input-panel")
+            div(class="text") Content:
+            div(class="input-text")
+              textarea(id="msgpost", name="msgpost", class="input-panel")
+            div(class="clear")
+          div(id="bottom")
+            a(href="/admin")
+              div(id="back-button", class="back-button")
+                div(id="text") Back
+            div(id="submit-button")
+              input(type="submit", id="submitForm", name="submitForm", value="Submit")
+            div(class="clear")
