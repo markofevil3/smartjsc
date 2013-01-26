@@ -68,13 +68,6 @@ exports.index = function(req, res) {
       req.session.lang = req.query.lang;
     }
   }
-  user = new User({});
-  user.username = 'markofevil3';
-  user.password = 'ltu052006';
-  user.displayName = 'Bui Phi Quan';
-  user.admin = true;
-  user.superior = true;
-  user.save();
   Gallery.find({'type': GALLERY}).sort({ 'uploadDate': -1 }).exec(function(err, galleries) {
     res.render('index', {
       title: 'SmartJSC',
@@ -90,18 +83,15 @@ exports.news = function(req, res) {
     if (err) {
       console.log(err);
     }
-    console.log(news);
     res.json({ 'data': news });
   });
 };
 
 exports.studying = function(req, res) {
-  console.log(req.query.subType);
-  Article.findOne({ $and: [{'type': ARTICLE_STUDYING}, {'subType': req.query.subType}]}, function(err, studying) {    
+  Article.findOne({ $and: [{'type': ARTICLE_STUDYING}, {'subType': parseInt(req.query.subType)}]}, function(err, studying) {    
     if (err) {
       console.log(err);
     }
-    console.log(studying);
     res.json({ 'data': studying });
   });
 }
@@ -192,7 +182,7 @@ exports.userPanel = function(req, res) {
 };
 
 exports.authenticate = function(req, res) {
-  User.findOne({ $and: [{ 'username': req.body.username }, { 'password': req.body.password }] }, function(err, user) {
+  User.findOne({ '$and': [{ username: req.body.username }, { password: req.body.password }] }, function (err, user) {
     if (err) {
       console.log(err);
     }
@@ -541,7 +531,6 @@ exports.addGallery = function(req, res) {
           var newFolder = folder + '/' + gallery.title.replace(/\s/g, '');
           uploadGalleryImages(images, newFolder, [], function(fileLinks) {
             gallery.images = gallery.images.concat(fileLinks);
-            console.log('done upload');
             gallery.save(function() {
               renderAddGallery(req, res, {status: "Gallery updated"});
             });

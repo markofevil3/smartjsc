@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var ObjectId = Schema.ObjectId;
 
 var articleSchema = new Schema({
   order: { type: Number, default: 1 },
@@ -35,7 +34,6 @@ var userSchema = new Schema({
   files: [uploadFileSchema],
   admin: { type: Boolean, default: false },
   superior: { type: Boolean, default: false }
-  
 });
 
 module.exports = {

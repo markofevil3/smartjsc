@@ -41,7 +41,6 @@ app.configure('production', function(){
 
 function check_auth(req, res, next) {
   //  if the user isn't logged in, redirect them to a login page
-  console.log(req.session.authenticated);
   if(!req.session.authenticated) {
     res.redirect("/login");
     return;
