@@ -6,4 +6,4 @@ java -jar node_modules/yuicompressor/yuicompressor-2.4.2.jar public/javascripts 
 cat public/minified/*.js >public/javascripts/minified.js
 rm -f public/minified/*.js
 
-node app.js
+sudo node app.js

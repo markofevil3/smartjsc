@@ -5,7 +5,7 @@ set :runner, user
 set :deploy_to, "/home/ec2-user/www/smartjsc"
 # set :revision, ENV['revision'] if ENV['revision']
 # set :keep_releases, 5
-set :use_sudo, true
+set :use_sudo, false
 ssh_options[:keys] = ["#{ENV['HOME']}/.ssh/bpquanpublic.pem"]
 
 set :scm, :git
@@ -26,12 +26,12 @@ namespace :smartjsc do
   end
 
   task :start, :roles => :app do
-    run "cd /home/ec2-user/www/smartjsc; mongod --dbpath ~/mongodb/data >> #{shared_path}/log/production.log 2>&1 &"
-    run "cd /home/ec2-user/www/smartjsc; ./start.sh >> #{shared_path}/log/production.log 2>&1 &"
+    run "cd /home/ec2-user/www/smartjsc; mongod --dbpath ~/mongodb/data >> production.log 2>&1 &"
+    run "cd /home/ec2-user/www/smartjsc; ./start.sh >> production.log 2>&1 &"
   end
 
   task :stop, :roles => :app do
-    run "cd /home/ec2-user/www/smartjsc; sudo pkill node >> #{shared_path}/log/production.log 2>&1 &"
+    run "cd /home/ec2-user/www/smartjsc; sudo pkill node >> production.log 2>&1 &"
   end
 
   task :restart, :roles => :app do
