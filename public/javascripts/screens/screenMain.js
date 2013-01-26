@@ -12,6 +12,7 @@ ScreenMain.hamlScreen =
                '    div(id="content-wrap")',
                '  div(id="image-slider")',
                'div(id="bottom-panel")',
+               '  div(id="footer-image")',
                '  div(id="intro-image" class="home-intro")',
                '    img(id="main-screen-image" class="home-adv")',
                'a(href="/login")',
@@ -126,31 +127,23 @@ ScreenMain.start = function() {
         if ($(e).find('#number').offset().top < 0) {
           $(e).find('#number').animate({'top': '0'});
         }
-        var introImage = ScreenMain.screen.querySelector('#intro-image')
-        introImage.style.bottom = '-100%';
-        ScreenMain.imageAdvHolder.className = e.id + '-intro';
-        ScreenMain.imageAdvHolder.firstChild.className = e.id + '-adv';
-        // if ($(ScreenMain.imageAdvHolder).width() > 0) {
-          ScreenMain.imageAdvHolder.style.left = calculateImagePos(e.id + '-adv');
-        // }
-        $(introImage).stop().animate({
-          bottom: 0
-        }, 1000);
-        // $(ScreenMain.imageAdvHolder).slideDown('fast', function() {
-        //   if ($(this).width() > 0) {
-        //     ScreenMain.imageAdvHolder.style.left = calculateImagePos(e.id + '-adv');
-        //   }
-        // });
-        // $(ScreenMain.imageAdvHolder).hide().slideDown('fast', function() {
-        //   if ($(this).width() > 0) {
-        //     ScreenMain.imageAdvHolder.style.left = calculateImagePos(e.id + '-adv');
-        //   }
-        // });
+        ScreenMain.changeIntroImage(e.id);
       }
     });
   }
   setupAnimation();
 };
+
+ScreenMain.changeIntroImage = function(id) {
+  var introImage = ScreenMain.screen.querySelector('#intro-image')
+  introImage.style.bottom = '-100%';
+  ScreenMain.imageAdvHolder.className = id + '-intro';
+  ScreenMain.imageAdvHolder.firstChild.className = id + '-adv';
+  ScreenMain.imageAdvHolder.style.left = calculateImagePos(id + '-adv');
+  $(introImage).stop().animate({
+    bottom: 0
+  }, 1000);
+}
 
 ScreenMain.initImageSlider = function(images, type) {
   var imagesDiv = '';
@@ -232,8 +225,6 @@ function calculateImagePos(imgId) {
     }
     return value + 'px';
   }
-  // console.log($('#intro-image').width());
-  // var value = $(window).width() - document.getElementById('intro-image').firstChild.width - IMG_LEFT_POS[imgId].left;
 };
 
 function mycarousel_initCallback(carousel)

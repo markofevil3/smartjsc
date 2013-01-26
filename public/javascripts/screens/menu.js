@@ -47,6 +47,20 @@ Menu.hamlMenu =
                '            div(class="number-des") 02',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") twitter',
+               '      div(id="skype" class="sub-menu")',
+               '        div(class="skype sub-menu-icon")',
+               '        div(id="skype-des" class="description")',
+               '          div(class="top-des")',
+               '            div(class="number-des") 03',
+               '            div(class="icon-des logo")',
+               '          div(class="bottom-des") skype',
+               '      div(id="yahoo" class="sub-menu")',
+               '        div(class="yahoo sub-menu-icon")',
+               '        div(id="yahoo-des" class="description")',
+               '          div(class="top-des")',
+               '            div(class="number-des") 04',
+               '            div(class="icon-des logo")',
+               '          div(class="bottom-des") yahoo',
                //### go abroad
                '  li(class="cate" style="z-index: 8")',
                '    div(id="go-abroad" class="go-abroad display-menu")',
@@ -92,27 +106,76 @@ Menu.hamlMenu =
                '        div(id="studying-text" class="text") #{studying}',
                '      div(id="number" class="number-icon number04")',
                '    div(id="studying-inside-cate", class="studying inside-cate")',
-               '      div(id="course" class="sub-menu")',
-               '        div(class="course sub-menu-icon")',
-               '        div(id="course-des" class="description")',
+               '      div(id="kindergarten" class="sub-menu")',
+               '        div(class="kindergarten sub-menu-icon")',
+               '        div(id="kindergarten-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 01',
                '            div(class="icon-des logo")',
-               '          div(class="bottom-des") course',
-               '      div(id="training" class="sub-menu")',
-               '        div(class="training sub-menu-icon")',
-               '        div(id="training-des" class="description")',
+               '          div(class="bottom-des") kindergarten',
+               '      div(id="pioneer" class="sub-menu")',
+               '        div(class="pioneer sub-menu-icon")',
+               '        div(id="pioneer-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 02',
                '            div(class="icon-des logo")',
-               '          div(class="bottom-des") training',
-               '      div(id="register" class="sub-menu")',
-               '        div(class="register sub-menu-icon")',
-               '        div(id="register-des" class="description")',
+               '          div(class="bottom-des") pioneer',
+               '      div(id="teenager" class="sub-menu")',
+               '        div(class="teenager sub-menu-icon")',
+               '        div(id="teenager-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 03',
                '            div(class="icon-des logo")',
-               '          div(class="bottom-des") register',
+               '          div(class="bottom-des") teenager',
+               '      div(id="academic" class="sub-menu")',
+               '        div(class="academic sub-menu-icon")',
+               '        div(id="academic-des" class="description")',
+               '          div(class="top-des")',
+               '            div(class="number-des") 04',
+               '            div(class="icon-des logo")',
+               '          div(class="bottom-des") academic',
+               '      div(id="reflection" class="sub-menu")',
+               '        div(class="reflection sub-menu-icon")',
+               '        div(id="reflection-des" class="description")',
+               '          div(class="top-des")',
+               '            div(class="number-des") 05',
+               '            div(class="icon-des logo")',
+               '          div(class="bottom-des") reflection',
+               '      div(id="communication" class="sub-menu")',
+               '        div(class="communication sub-menu-icon")',
+               '        div(id="communication-des" class="description")',
+               '          div(class="top-des")',
+               '            div(class="number-des") 06',
+               '            div(class="icon-des logo")',
+               '          div(class="bottom-des") communication',
+               '      div(id="intensive" class="sub-menu")',
+               '        div(class="intensive sub-menu-icon")',
+               '        div(id="intensive-des" class="description")',
+               '          div(class="top-des")',
+               '            div(class="number-des") 07',
+               '            div(class="icon-des logo")',
+               '          div(class="bottom-des") intensive',
+               '      div(id="exam" class="sub-menu")',
+               '        div(class="exam sub-menu-icon")',
+               '        div(id="exam-des" class="description")',
+               '          div(class="top-des")',
+               '            div(class="number-des") 08',
+               '            div(class="icon-des logo")',
+               '          div(class="bottom-des") english test',
+               '      div(id="business" class="sub-menu")',
+               '        div(class="business sub-menu-icon")',
+               '        div(id="business-des" class="description")',
+               '          div(class="top-des")',
+               '            div(class="number-des") 09',
+               '            div(class="icon-des logo")',
+               '          div(class="bottom-des") business',
+               '      div(id="skill" class="sub-menu")',
+               '        div(class="skill sub-menu-icon")',
+               '        div(id="skill-des" class="description")',
+               '          div(class="top-des")',
+               '            div(class="number-des") 10',
+               '            div(class="icon-des logo")',
+               '          div(class="bottom-des") skills',
                //### export
                '  li(class="cate" style="z-index: 6")',
                '    div(id="export" class="export display-menu")',
@@ -221,7 +284,13 @@ Menu.hideAll = function(callback) {
   var count = 0;
   var otherMenus = $("div.display-menu").parent();
   for (var i = 0; i < otherMenus.length; i++) {
+    $(otherMenus[i]).find('#close-bar').css('top', '-3em');
+    $(otherMenus[i]).find('#number').css("top", '-5.5em');
     unbindMouseOver(otherMenus[i]);
+  }
+  if (Menu.activeMenuBar != null) {
+    Menu.activeMenuBar[0].style.width = 0;
+    Menu.activeMenuBar[0].style.marginLeft = 0;
   }
   ScreenMain.removeImageSlider();
   $("div.text").hide();
@@ -229,7 +298,9 @@ Menu.hideAll = function(callback) {
   $("div.display-menu").parent().height('23%').slideUp(200, function() {
     count++;
     if (count == 9) {
-      callback();
+      if (callback) {
+        callback();
+      }
     }
   });
 };
@@ -337,6 +408,11 @@ Menu.enableButtons = function(menu) {
           images.push('/img/' + GALLERY[parseInt($(this).data('index'))].images[i]);
         }
         ScreenMain.initImageSlider(images, 'gallery');
+      });
+      break;
+    case 'studying':
+      $('#studying-inside-cate').find('.sub-menu').click(function(e) {
+        Menu.hideAll();
       });
       break;
   }

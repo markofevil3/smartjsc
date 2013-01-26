@@ -53,7 +53,6 @@ function setupAnimation() {
         opacity: '1'
       }, 100);
     } else {
-      console.log('bb');
       $(this).animate({
         width: '70%',
         height: '70%',

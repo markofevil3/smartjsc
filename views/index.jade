@@ -33,7 +33,15 @@ html
         for (var i = 0; i < insiteCates.length; i++) {
           if ($(insiteCates[i]).width() > 0) {
             if ($(window).width() > 900) {
-              insiteCates[i].style.width = $(window).width() + 'px';
+              if (insiteCates[i].id == 'studying-inside-cate') {
+                if ($(window).width() < 1330) {
+                  insiteCates[i].style.width = '1330px';
+                } else {
+                  insiteCates[i].style.width = $(window).width() + 'px';
+                }
+              } else {
+                insiteCates[i].style.width = $(window).width() + 'px';
+              }
             }
           }
         }
