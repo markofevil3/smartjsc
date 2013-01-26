@@ -90,7 +90,7 @@ exports.news = function(req, res) {
 
 exports.studying = function(req, res) {
   console.log(req.query.subType);
-  Article.findOne({ $and: [{'type': ARTICLE_STUDYING}, {'subType': parseInt(req.query.subType)}] }).sort({ 'uploadDate': -1 }).exec(function(err, studying) {
+  Article.findOne({ $and: [{'type': ARTICLE_STUDYING}, {'subType': req.query.subType}]}, function(err, studying) {    
     if (err) {
       console.log(err);
     }

@@ -9,7 +9,6 @@ var app = express();
 var mongoose = require('mongoose');
 var MongoStore = require('connect-mongo')(express);
 
-// mongoose.connect('mongodb://localhost/cokhi');
 // mongoose.connect('mongodb://54.251.45.255/smartjsc');
 mongoose.connect('mongodb://localhost/smartjsc');
 
