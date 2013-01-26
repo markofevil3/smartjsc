@@ -24,11 +24,12 @@
 # java -jar node_modules/yuicompressor/yuicompressor-2.4.2.jar public/javascripts --fo public/minified
 # cat public/minified/*.js >public/javascripts/minified.js
 # rm -f public/minified/*.js
+# # 
+# # echo starting...
+# # sudo node app.js
 # 
-# echo starting...
-# sudo node app.js
-
-# ssh -i .ssh/bpquanpublic.pem ec2-user@ec2-175-41-185-47.ap-southeast-1.compute.amazonaws.com 'mongod --dbpath mongodb/data'
-pkill node
-mongod --dbpath ~/mongodb/data >> production.log 2>&1 &
-sudo node app.js >> production.log 2>&1 &
+# # ssh -i .ssh/bpquanpublic.pem ec2-user@ec2-175-41-185-47.ap-southeast-1.compute.amazonaws.com 'mongod --dbpath mongodb/data'
+# pkill node
+# mongod --dbpath ~/mongodb/data >> production.log 2>&1 &
+# sudo node app.js >> production.log 2>&1 &
+ssh -i ~/.ssh/bpquanpublic.pem ec2-user@ec2-175-41-185-47.ap-southeast-1.compute.amazonaws.com 'cd ~/www/smartjsc/; git pull; ./start.sh'
