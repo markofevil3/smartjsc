@@ -26,12 +26,12 @@ namespace :smartjsc do
   end
 
   task :start, :roles => :app do
-    run "cd /home/ec2-user/www/smartjsc; mongod --dbpath ~/mongodb/data >> #{shared_path}/production.log 2>&1 &"
-    run "cd /home/ec2-user/www/smartjsc; ./start.sh >> #{shared_path}/production.log 2>&1 &"
+    run "cd /home/ec2-user/www/smartjsc; mongod --dbpath ~/mongodb/data >> #{shared_path}/log/production.log 2>&1 &"
+    run "cd /home/ec2-user/www/smartjsc; ./start.sh >> #{shared_path}/log/production.log 2>&1 &"
   end
 
   task :stop, :roles => :app do
-    run "cd /home/ec2-user/www/smartjsc; sudo pkill node >> #{shared_path}/production.log 2>&1 &"
+    run "cd /home/ec2-user/www/smartjsc; sudo pkill node >> #{shared_path}/log/production.log 2>&1 &"
   end
 
   task :restart, :roles => :app do
