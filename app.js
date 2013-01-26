@@ -13,7 +13,7 @@ var MongoStore = require('connect-mongo')(express);
 mongoose.connect('mongodb://localhost/smartjsc');
 
 app.configure(function() {
-  app.set('port', process.env.PORT || 80);
+  app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.use(express.favicon());
@@ -60,12 +60,12 @@ app.all('*', function(req, res, next) {
 app.get('/', routes.index);
 app.get('/news', routes.news);
 app.get('/questions', routes.questions);
+app.get('/studying', routes.studying);
 
 app.get('/login', routes.login);
 app.get('/logout', routes.logout);
 app.get('/user', check_auth, routes.userPanel);
 app.get('/admin', check_auth, routes.adminPanel);
-// app.get('/superior', check_auth, routes.superiorPanel);
 app.get('/showFiles', check_auth, routes.showFiles);
 app.get('/download', check_auth, routes.download);
 app.get('/createAccount', check_auth, routes.createAccount);

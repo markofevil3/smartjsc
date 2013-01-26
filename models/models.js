@@ -9,6 +9,7 @@ var articleSchema = new Schema({
   shortDes: String,
   content: String,
   type: Number,
+  subType: Number,
   thumbnailUrl: String
 });
 

@@ -121,6 +121,65 @@ body {
     position: absolute;
     min-width: 70em;
   }
+  
+  #item-content {
+    display: none;
+    width: 50%;
+    min-width: 25em;
+    min-height: 7.3em;
+    position: absolute;
+    background-color: #499c96;
+    left: 15em;
+    .box-shadow(0px 1px 6px 0px rgba(0,0,0,0.8));
+    .rounded-corners-bottom-left(6px);
+    .rounded-corners-bottom-right(6px);
+    
+    #main-content {
+      float: left;
+      height: 100%;
+      min-height: 7.3em;
+      max-height: 45em;
+      overflow: scroll;
+      width: 100%;
+      color: #3c3c3c;
+
+      #item-title {
+        width: 94%;
+        text-align: left;
+        font-weight: bold;
+        font-size: 1.3em;
+        margin: 0.5em auto;
+      }
+      #item-full-des {
+        width: 94%;
+        margin: 0 auto 0.5em auto;
+        text-align: justify;
+        font-size: 1.1em;
+        line-height: 1.2em;
+      }
+    }
+    #close-button {
+      background-color: #499c96;
+      width: 3em;
+      height: 3em;
+      position: absolute;
+      right: -2.8em;
+      .rounded-corners(7px);
+      border: 1px solid #fff;
+
+      #close-icon {
+        width: 2em;
+        height: 2em;
+        margin: 0.5em;
+        position: relative;
+        background-image: url('../img/icons/close-button.png');
+        .background-size(100% 100%);
+      }
+    }
+    #close-button.pressed {
+      opacity: 0.6;
+    }
+  }
   #content {
     width: 40%;
     min-width: 25em;
@@ -199,6 +258,12 @@ body {
 /*  left: 20em;*/
   height: 50%;
 }
+.academic-intro {
+  height: 85%;
+}
+.communication-intro {
+  height: 90%;
+}
 .home-adv {
   content: url('../img/icons/home-adv.png');
 }
@@ -216,6 +281,24 @@ body {
 }
 .contact-adv {
   content: url('../img/icons/contact-adv.png');
+}
+.kindergarten-adv {
+  content: url('../img/icons/studying-maugiao-adv.png');
+}
+.pioneer-adv {
+  content: url('../img/icons/studying-thieunhi-adv.png');
+}
+.teenager-adv {
+  content: url('../img/icons/studying-thieunien-adv.png');
+}
+.academic-adv {
+  content: url('../img/icons/studying-hocthuat-adv.png');
+}
+.reflection-adv {
+  content: url('../img/icons/studying-phanxa-adv.png');
+}
+.communication-adv {
+  content: url('../img/icons/studying-giaotiep-adv.png');
 }
 
 /*#screen-question {*/

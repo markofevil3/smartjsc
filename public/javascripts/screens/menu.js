@@ -106,70 +106,70 @@ Menu.hamlMenu =
                '        div(id="studying-text" class="text") #{studying}',
                '      div(id="number" class="number-icon number04")',
                '    div(id="studying-inside-cate", class="studying inside-cate")',
-               '      div(id="kindergarten" class="sub-menu")',
+               '      div(id="kindergarten" class="sub-menu" data-subType="1")',
                '        div(class="kindergarten sub-menu-icon")',
                '        div(id="kindergarten-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 01',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") kindergarten',
-               '      div(id="pioneer" class="sub-menu")',
+               '      div(id="pioneer" class="sub-menu" data-subType="2")',
                '        div(class="pioneer sub-menu-icon")',
                '        div(id="pioneer-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 02',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") pioneer',
-               '      div(id="teenager" class="sub-menu")',
+               '      div(id="teenager" class="sub-menu" data-subType="3")',
                '        div(class="teenager sub-menu-icon")',
                '        div(id="teenager-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 03',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") teenager',
-               '      div(id="academic" class="sub-menu")',
+               '      div(id="academic" class="sub-menu" data-subType="4")',
                '        div(class="academic sub-menu-icon")',
                '        div(id="academic-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 04',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") academic',
-               '      div(id="reflection" class="sub-menu")',
+               '      div(id="reflection" class="sub-menu" data-subType="5")',
                '        div(class="reflection sub-menu-icon")',
                '        div(id="reflection-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 05',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") reflection',
-               '      div(id="communication" class="sub-menu")',
+               '      div(id="communication" class="sub-menu" data-subType="6")',
                '        div(class="communication sub-menu-icon")',
                '        div(id="communication-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 06',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") communication',
-               '      div(id="intensive" class="sub-menu")',
+               '      div(id="intensive" class="sub-menu" data-subType="7")',
                '        div(class="intensive sub-menu-icon")',
                '        div(id="intensive-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 07',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") intensive',
-               '      div(id="exam" class="sub-menu")',
+               '      div(id="exam" class="sub-menu" data-subType="8")',
                '        div(class="exam sub-menu-icon")',
                '        div(id="exam-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 08',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") english test',
-               '      div(id="business" class="sub-menu")',
+               '      div(id="business" class="sub-menu" data-subType="9")',
                '        div(class="business sub-menu-icon")',
                '        div(id="business-des" class="description")',
                '          div(class="top-des")',
                '            div(class="number-des") 09',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") business',
-               '      div(id="skill" class="sub-menu")',
+               '      div(id="skill" class="sub-menu" data-subType="10")',
                '        div(class="skill sub-menu-icon")',
                '        div(id="skill-des" class="description")',
                '          div(class="top-des")',
@@ -412,7 +412,27 @@ Menu.enableButtons = function(menu) {
       break;
     case 'studying':
       $('#studying-inside-cate').find('.sub-menu').click(function(e) {
-        Menu.hideAll();
+        var div = $(this);
+        ajax('/studying', {
+          subType: $(this).data('subtype')
+        },
+        function(response) {
+          var json = JSON.parse(response);
+          Menu.hideAll();
+          $('#item-content').show('slow');
+          if (json.data) {
+            $('#item-title').html(json.data.title);
+            $('#item-full-des').html(json.data.content);
+          }
+          ScreenMain.changeIntroImage($(div).attr('id'));
+          Button.enable(ScreenMain.screen.querySelector("#close-button"), function() {
+            $('#item-content').hide('slow');
+            Menu.showAll();
+          });
+        },
+        function(response) {
+          alert('There was a problem connecting to the server. Please refresh and try again later.');
+        });
       });
       break;
   }

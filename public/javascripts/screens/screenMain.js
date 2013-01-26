@@ -4,12 +4,33 @@ ScreenMain.screen = document.createElement('div');
 ScreenMain.screen.id = 'screen-main';
 ScreenMain.imageAdvHolder = null;
 
+var IMG_LEFT_POS = {
+  'home-adv': {'left': 100, 'min': 353, 'width': 400},
+  'about-adv': {'left': 100, 'min': 786, 'width': 300},
+  'links-adv': {'left': 200, 'min': 365, 'width': 400},
+  'go-abroad-adv': {'left': 200, 'min': 380, 'width': 650},
+  'studying-adv': {'left': 200, 'min': 390, 'width': 650},
+  'contact-adv': {'left': 200, 'min': 250, 'width': 830},
+  'kindergarten-adv': {'left': 100, 'min': 786, 'width': 300},
+  'pioneer-adv': {'left': 100, 'min': 786, 'width': 300},
+  'teenager-adv': {'left': 100, 'min': 786, 'width': 300},
+  'academic-adv': {'left': 100, 'min': 786, 'width': 350},
+  'reflection-adv': {'left': 100, 'min': 786, 'width': 300},
+  'communication-adv': {'left': 100, 'min': 786, 'width': 350},
+};
+
 ScreenMain.hamlScreen =
   Haml.compile('div(id="menu-holder")',
                '  | #{menu}',
                'div(id="middle-panel-wrap")',
                '  div(id="content")',
                '    div(id="content-wrap")',
+               '  div(id="item-content")',
+               '    div(id="main-content") ',
+               '      div(id="item-title")',
+               '      div(id="item-full-des")',
+               '    div(id="close-button")',
+               '      div(id="close-icon")',
                '  div(id="image-slider")',
                'div(id="bottom-panel")',
                '  div(id="footer-image")',
@@ -206,15 +227,6 @@ ScreenMain.handleFormSubmit = function(form) {
       return false;
     }
   });
-};
-
-var IMG_LEFT_POS = {
-  'home-adv': {'left': 100, 'min': 353, 'width': 400},
-  'about-adv': {'left': 100, 'min': 786, 'width': 300},
-  'links-adv': {'left': 200, 'min': 365, 'width': 400},
-  'go-abroad-adv': {'left': 200, 'min': 380, 'width': 650},
-  'studying-adv': {'left': 200, 'min': 390, 'width': 650},
-  'contact-adv': {'left': 200, 'min': 250, 'width': 830},
 };
 
 function calculateImagePos(imgId) {

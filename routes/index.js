@@ -1,7 +1,6 @@
 var routes = require('../routes');
 var fs = require('fs');
 var Path= require('path');
-var WebData = require('../lib/webData');
 var Util = require('../lib/Util');
 var Email   = require('emailjs/email');
 
@@ -20,6 +19,7 @@ var EMAIL_SERVER  = Email.server.connect({
 
 var ARTICLE_QUESTION = 1;
 var ARTICLE_NEWS = 2;
+var ARTICLE_STUDYING = 3;
 var GALLERY = 1;
 var CAMPING = 2;
 
@@ -87,6 +87,17 @@ exports.news = function(req, res) {
     res.json({ 'data': news });
   });
 };
+
+exports.studying = function(req, res) {
+  console.log(req.query.subType);
+  Article.findOne({ $and: [{'type': ARTICLE_STUDYING}, {'subType': parseInt(req.query.subType)}] }).sort({ 'uploadDate': -1 }).exec(function(err, studying) {
+    if (err) {
+      console.log(err);
+    }
+    console.log(studying);
+    res.json({ 'data': studying });
+  });
+}
 
 exports.questions = function(req, res) {
   Article.find({'type': ARTICLE_QUESTION}).sort({ 'uploadDate': -1 }).exec(function(err, questions) {
@@ -543,7 +554,7 @@ exports.addGallery = function(req, res) {
 
 exports.addArticle = function(req, res) {
   if (req.body.submitForm == "Submit") {
-    if (req.files.articleThumbnail.size <= 0) {
+    if (parseInt(req.body.articleType) != ARTICLE_STUDYING && req.files.articleThumbnail.size <= 0) {
       renderAddArtile(req, res, {warning: 'Choose Thumbnail'});
       return;
     }
@@ -565,22 +576,35 @@ exports.addArticle = function(req, res) {
         folder = 'news';
         break;
     }
-    var file = req.files.articleThumbnail;
-    if (file.type.indexOf('png') != -1 || file.type.indexOf('jpg') != -1 || file.type.indexOf('jpeg') != -1) {
-      fileName = uploadDate + '.' + file.type.split('/')[1];
-    }
-    moveFile(file, folder, fileName, function(newFileName) {
+    if (parseInt(req.body.articleType) != ARTICLE_STUDYING) {
+      var file = req.files.articleThumbnail;
+      if (file.type.indexOf('png') != -1 || file.type.indexOf('jpg') != -1 || file.type.indexOf('jpeg') != -1) {
+        fileName = uploadDate + '.' + file.type.split('/')[1];
+      }
+      moveFile(file, folder, fileName, function(newFileName) {
+        var article = new Article({});
+        article.title = req.body.articleTitle;
+        article.uploadDate = uploadDate;
+        article.shortDes = req.body.articleShortDest;
+        article.content = req.body.msgpost;
+        article.type = parseInt(req.body.articleType);
+        article.thumbnailUrl = folder + '/' + newFileName;
+        article.save(function() {
+          renderAddArtile(req, res, {status: "New article added"});
+        });
+      });
+    } else {
       var article = new Article({});
       article.title = req.body.articleTitle;
       article.uploadDate = uploadDate;
       article.shortDes = req.body.articleShortDest;
       article.content = req.body.msgpost;
       article.type = parseInt(req.body.articleType);
-      article.thumbnailUrl = folder + '/' + newFileName;
+      article.subType = parseInt(req.body.articleSubType);
       article.save(function() {
         renderAddArtile(req, res, {status: "New article added"});
       });
-    })
+    }
   } else {
     if (req.session.user.superior) {
       renderAddArtile(req, res, {});
