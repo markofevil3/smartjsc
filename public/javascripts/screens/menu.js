@@ -113,13 +113,13 @@ Menu.hamlMenu =
                '            div(class="number-des") 01',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") kindergarten',
-               '      div(id="pioneer" class="sub-menu" data-subType="2")',
-               '        div(class="pioneer sub-menu-icon")',
-               '        div(id="pioneer-des" class="description")',
-               '          div(class="top-des")',
-               '            div(class="number-des") 02',
-               '            div(class="icon-des logo")',
-               '          div(class="bottom-des") pioneer',
+               // '      div(id="pioneer" class="sub-menu" data-subType="2")',
+               // '        div(class="pioneer sub-menu-icon")',
+               // '        div(id="pioneer-des" class="description")',
+               // '          div(class="top-des")',
+               // '            div(class="number-des") 02',
+               // '            div(class="icon-des logo")',
+               // '          div(class="bottom-des") pioneer',
                '      div(id="teenager" class="sub-menu" data-subType="3")',
                '        div(class="teenager sub-menu-icon")',
                '        div(id="teenager-des" class="description")',
@@ -169,13 +169,13 @@ Menu.hamlMenu =
                '            div(class="number-des") 09',
                '            div(class="icon-des logo")',
                '          div(class="bottom-des") business',
-               '      div(id="skill" class="sub-menu" data-subType="10")',
-               '        div(class="skill sub-menu-icon")',
-               '        div(id="skill-des" class="description")',
-               '          div(class="top-des")',
-               '            div(class="number-des") 10',
-               '            div(class="icon-des logo")',
-               '          div(class="bottom-des") skills',
+               // '      div(id="skill" class="sub-menu" data-subType="10")',
+               // '        div(class="skill sub-menu-icon")',
+               // '        div(id="skill-des" class="description")',
+               // '          div(class="top-des")',
+               // '            div(class="number-des") 10',
+               // '            div(class="icon-des logo")',
+               // '          div(class="bottom-des") skills',
                //### export
                '  li(class="cate" style="z-index: 6")',
                '    div(id="export" class="export display-menu")',
@@ -369,6 +369,9 @@ Menu.showMenuBar = function(menu, callback) {
     $('#gallery-inside').animate({width: '18.5em', height: '95%'},{queue:false, duration:500, easing: 'easeOutExpo'});
     Menu.activeMenuBar = $('#gallery-inside');
   } else {
+    // if (menu.id == 'studying') {
+    //   document.body.style.width = '1330px';
+    // }
     Menu.activeMenuBar = $(menu).parent().find('#'+ menu.id + '-inside-cate');
     Menu.activeMenuBar.css('marginLeft', '-5em').animate({width: $(document).width() + 'px'},{queue:false, duration:500, easing: 'easeOutExpo'});
   }
@@ -412,11 +415,13 @@ Menu.enableButtons = function(menu) {
       break;
     case 'studying':
       $('#studying-inside-cate').find('.sub-menu').click(function(e) {
+        Popup.openLoading(ScreenManager.currentScreen);
         var div = $(this);
         ajax('/studying', {
           subType: $(this).data('subtype')
         },
         function(response) {
+          Popup.close();
           var json = JSON.parse(response);
           Menu.hideAll();
           $('#item-content').show('slow');
