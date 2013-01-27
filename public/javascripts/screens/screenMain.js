@@ -62,7 +62,8 @@ ScreenMain.hamlImageSlider =
 
 ScreenMain.hamlImage =
   Haml.compile('li',
-               '  img(src=#{url} class="slider-images")'
+               '  a(href="#{url}" rel="lightbox[roadtrip]")',
+               '    img(src=#{url} class="slider-images")'
   );
   
 ScreenMain.start = function() {

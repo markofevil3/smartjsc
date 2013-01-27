@@ -43,10 +43,12 @@ ScreenQuestion.hamlRow =
   );
   
 ScreenQuestion.start = function() {
+  Popup.openLoading(ScreenManager.currentScreen);
   ajax('/questions', {
     timeStamp: Date.now()
   },
   function(response) {
+    Popup.close();
     var json = JSON.parse(response);
     ScreenQuestion.items = json.data;
     ScreenQuestion.screen.innerHTML = ScreenQuestion.hamlScreen({
@@ -60,9 +62,9 @@ ScreenQuestion.start = function() {
     Button.enable(ScreenQuestion.prevButton, ScreenQuestion.prev);
     Button.enable(ScreenQuestion.nextButton, ScreenQuestion.next);
     Button.enable(ScreenQuestion.screen.querySelector("#question-menu"), function() {
-      // $("#screen-question").slideUp('slow', function() {
-      ScreenManager.setScreen('main');
-      // });
+      $(ScreenManager.currentScreen).fadeOut('slow', function() {
+        ScreenManager.setScreen('main');
+      });
     });
   },
   function(response) {

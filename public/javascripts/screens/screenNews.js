@@ -43,10 +43,12 @@ ScreenNews.hamlRow =
   );
   
 ScreenNews.start = function() {
+  Popup.openLoading(ScreenManager.currentScreen);
   ajax('/news', {
     timeStamp: Date.now()
   },
   function(response) {
+    Popup.close();
     var json = JSON.parse(response);
     ScreenNews.items = json.data;
     ScreenNews.screen.innerHTML = ScreenNews.hamlScreen({
@@ -60,9 +62,9 @@ ScreenNews.start = function() {
     Button.enable(ScreenNews.prevButton, ScreenNews.prev);
     Button.enable(ScreenNews.nextButton, ScreenNews.next);
     Button.enable(ScreenNews.screen.querySelector("#news-menu"), function() {
-      // $("#screen-question").slideUp('slow', function() {
-      ScreenManager.setScreen('main');
-      // });
+      $(ScreenManager.currentScreen).fadeOut('slow', function() {
+        ScreenManager.setScreen('main');
+      });
     });
   },
   function(response) {

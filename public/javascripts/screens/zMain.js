@@ -22,6 +22,7 @@ ScreenManager.setScreen = function(nextScreenId) {
   ScreenManager.previousScreenId = nextScreenId;
 
   document.body.appendChild(ScreenManager.currentScreen);
+  $(ScreenManager.currentScreen).fadeIn('fast');
   if (ScreenManager.currentScreen.id == 'screen-main') {
     setupAnimation();
   }
