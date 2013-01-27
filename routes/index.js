@@ -34,7 +34,7 @@ function removeTempFiles() {
 setInterval(removeTempFiles, 86400000 * 3);
 
 //client side
-var imageFiles = null;
+var imageFiles = [];
 
 function getFiles(dir, type, variable) {
   fs.readdir(dir, function (err, files) {
@@ -52,13 +52,14 @@ function getFiles(dir, type, variable) {
     switch(variable) {
       case 0:
         returnFiles.push('background.jpg');
-        imageFiles = returnFiles;
+        imageFiles = imageFiles.concat(returnFiles);
         break;
     }
   });
 };
 
 getFiles('public/img/icons/', 'png', 0);
+getFiles('public/img/icons/', 'gif', 0);
 
 exports.index = function(req, res) {
   if (!req.session.lang) {
