@@ -1,11 +1,14 @@
 doctype 5
-- var convertDate = function(date) {
--   date = new Date(date);
--   var day = date.getDate();
--   var month = date.getMonth() + 1;
--   var year = date.getYear() + 1900;
--   var hour = date.getHours();
--   var min = date.getMinutes();
+- var convertDate = function(d) {
+-   offset = '+7';
+-   d = new Date(d);
+-   utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+-   nd = new Date(utc + (3600000*offset));
+-   var day = nd.getDate();
+-   var month = nd.getMonth() + 1;
+-   var year = nd.getYear() + 1900;
+-   var hour = nd.getHours();
+-   var min = nd.getMinutes();
 -   return hour + ':' + min + ' ' + day + '/' + month + '/' + year;
 - };
 
@@ -26,4 +29,3 @@ html
     
   body(class="yui-skin-sam")
     block content
-    
