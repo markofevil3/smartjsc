@@ -31,7 +31,7 @@ function removeTempFiles() {
   });
 };
 
-setInterval(removeTempFiles, 86400000 * 3);
+setInterval(removeTempFiles, 86400000 * 2);
 
 //client side
 var imageFiles = [];
