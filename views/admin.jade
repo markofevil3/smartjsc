@@ -21,7 +21,7 @@ block content
           div(id="file-table")
             - each teacher in teachers
               div(class="holder")
-                a(href="showFiles?username=#{teacher.username}")
+                a(href="/showFiles?username=#{teacher.username}")
                   div(class="teacher-name")
                     div(class="text") #{teacher.displayName}
                 div(class="clear")
