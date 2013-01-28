@@ -18,7 +18,7 @@ block content
           div(class="status", style="color: green") File upload success!
         - if (status == 'error')
           div(class="status", style="color: red") Error! Please retry.
-      form(action="uploadLecture", method="POST", enctype="multipart/form-data")
+      form(action="uploadLecture", method="POST", enctype="multipart/form-data", onsubmit="openloading(this); return false;")
         div(id="file-panel")
           div(id="choose-file")
             div(class="text") Attach files:

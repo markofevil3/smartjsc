@@ -65,7 +65,7 @@ html
       galleryThumbnails = [];
       for (var i = 0; i < GALLERY.length; i++) {
         galleryThumbnails.push(GALLERY[i].thumbnailUrl);
-        galleryThumbnails = galleryThumbnails.concat(GALLERY[i].images);
+        // galleryThumbnails = galleryThumbnails.concat(GALLERY[i].images);
       }
       preloadImage(galleryThumbnails, null);
       preloadImage(PRELOAD_ICONS, 'icons', function() {

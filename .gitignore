@@ -1,2 +1,8 @@
 production.log
 public/javascripts/minified.js
+public/lectures/*
+public/img/camping
+public/img/galleries
+public/img/news
+public/img/questions
+public/img/upload
