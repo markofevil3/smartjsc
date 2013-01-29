@@ -5,18 +5,18 @@ ScreenMain.screen.id = 'screen-main';
 ScreenMain.imageAdvHolder = null;
 
 var IMG_LEFT_POS = {
-  'home-adv': {'left': 100, 'min': 353, 'width': 400},
-  'about-adv': {'left': 100, 'min': 786, 'width': 300},
-  'links-adv': {'left': 100, 'min': 365, 'width': 400},
-  'go-abroad-adv': {'left': 100, 'min': 380, 'width': 650},
-  'studying-adv': {'left': 100, 'min': 390, 'width': 650},
-  'contact-adv': {'left': 100, 'min': 250, 'width': 830},
-  'kindergarten-adv': {'left': 100, 'min': 786, 'width': 300},
-  'pioneer-adv': {'left': 100, 'min': 786, 'width': 300},
-  'teenager-adv': {'left': 100, 'min': 786, 'width': 300},
-  'academic-adv': {'left': 100, 'min': 786, 'width': 350},
-  'reflection-adv': {'left': 100, 'min': 786, 'width': 300},
-  'communication-adv': {'left': 100, 'min': 786, 'width': 350},
+  'home-adv': {'left': 100, 'min': 353, 'width': 400, 'image': '/img/icons/home-adv.png'},
+  'about-adv': {'left': 100, 'min': 786, 'width': 300, 'image': '/img/icons/about-adv.png'},
+  'links-adv': {'left': 100, 'min': 365, 'width': 400, 'image': '/img/icons/links-adv.png'},
+  'go-abroad-adv': {'left': 100, 'min': 380, 'width': 650, 'image': '/img/icons/go-abroad-adv.png'},
+  'studying-adv': {'left': 100, 'min': 390, 'width': 650, 'image': '/img/icons/studying-adv.png'},
+  'contact-adv': {'left': 100, 'min': 250, 'width': 830, 'image': '/img/icons/contact-adv.png'},
+  'kindergarten-adv': {'left': 100, 'min': 786, 'width': 300, 'image': '/img/icons/studying-maugiao-adv.gif'},
+  'pioneer-adv': {'left': 100, 'min': 786, 'width': 300, 'image': '/img/icons/studying-thieunhi-adv.png'},
+  'teenager-adv': {'left': 100, 'min': 786, 'width': 300, 'image': '/img/icons/studying-thieunien-adv.gif'},
+  'academic-adv': {'left': 100, 'min': 786, 'width': 350, 'image': '/img/icons/studying-hocthuat-adv.gif'},
+  'reflection-adv': {'left': 100, 'min': 786, 'width': 300, 'image': '/img/icons/studying-phanxa-adv.gif'},
+  'communication-adv': {'left': 100, 'min': 786, 'width': 350, 'image': '/img/icons/studying-giaotiep-adv.gif'},
 };
 
 ScreenMain.hamlScreen =
@@ -35,7 +35,7 @@ ScreenMain.hamlScreen =
                'div(id="bottom-panel")',
                '  div(id="footer-image")',
                '  div(id="intro-image" class="home-intro")',
-               '    img(id="main-screen-image" class="home-adv")',
+               '    img(id="main-screen-image" class="home-adv" src="/img/icons/home-adv.png")',
                'a(href="/login")',
                '  div(id="login-icon")'
   );
@@ -160,7 +160,7 @@ ScreenMain.changeIntroImage = function(id) {
   var introImage = ScreenMain.screen.querySelector('#intro-image')
   introImage.style.bottom = '-100%';
   ScreenMain.imageAdvHolder.className = id + '-intro';
-  ScreenMain.imageAdvHolder.firstChild.className = id + '-adv';
+  ScreenMain.imageAdvHolder.firstChild.src = IMG_LEFT_POS[id + '-adv'].image;
   ScreenMain.imageAdvHolder.style.left = calculateImagePos(id + '-adv');
   $(introImage).stop().animate({
     bottom: 0

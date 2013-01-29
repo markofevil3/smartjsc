@@ -316,7 +316,7 @@ Menu.showAll = function() {
   }
   ScreenMain.imageAdvHolder.style.bottom = '-100%';
   ScreenMain.imageAdvHolder.className = 'home-intro';
-  ScreenMain.imageAdvHolder.firstChild.className = 'home-adv';
+  ScreenMain.imageAdvHolder.firstChild.src = IMG_LEFT_POS['home-adv'].image;
   ScreenMain.imageAdvHolder.style.left = calculateImagePos('home-adv');
   $(ScreenMain.imageAdvHolder).stop().animate({
     bottom: 0
