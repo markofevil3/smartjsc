@@ -160,7 +160,9 @@ ScreenMain.changeIntroImage = function(id) {
   var introImage = ScreenMain.screen.querySelector('#intro-image')
   introImage.style.bottom = '-100%';
   ScreenMain.imageAdvHolder.className = id + '-intro';
-  ScreenMain.imageAdvHolder.firstChild.src = IMG_LEFT_POS[id + '-adv'].image;
+  if (IMG_LEFT_POS[id + '-adv']) {
+    ScreenMain.imageAdvHolder.firstChild.src = IMG_LEFT_POS[id + '-adv'].image;
+  }
   ScreenMain.imageAdvHolder.style.left = calculateImagePos(id + '-adv');
   $(introImage).stop().animate({
     bottom: 0
