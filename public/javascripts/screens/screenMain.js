@@ -3,6 +3,7 @@ function ScreenMain() {};
 ScreenMain.screen = document.createElement('div');
 ScreenMain.screen.id = 'screen-main';
 ScreenMain.imageAdvHolder = null;
+ScreenMain.currentIntroImage = null;
 
 var IMG_LEFT_POS = {
   'home-adv': {'left': 100, 'min': 353, 'width': 400, 'image': '/img/icons/home-adv.png'},
@@ -35,7 +36,17 @@ ScreenMain.hamlScreen =
                'div(id="bottom-panel")',
                '  div(id="footer-image")',
                '  div(id="intro-image" class="home-intro")',
-               '    img(id="main-screen-image" class="home-adv" src="/img/icons/home-adv.png")',
+               '    img(id="intro-home-adv" class="home-adv main-screen-image" style="bottom: 0" src="/img/icons/home-adv.png")',
+               '    img(id="intro-about-adv" class="about-adv main-screen-image" src="/img/icons/about-adv.png")',
+               '    img(id="intro-links-adv" class="links-adv main-screen-image" src="/img/icons/links-adv.png")',
+               '    img(id="intro-go-abroad-adv" class="go-abroad-adv main-screen-image" src="/img/icons/go-abroad-adv.png")',
+               '    img(id="intro-studying-adv" class="studying-adv main-screen-image" src="/img/icons/studying-adv.png")',
+               '    img(id="intro-contact-adv" class="contact-adv main-screen-image" src="/img/icons/contact-adv.png")',
+               '    img(id="intro-kindergarten-adv" class="kindergarten-adv main-screen-image" src="/img/icons/studying-maugiao-adv.gif")',
+               '    img(id="intro-teenager-adv" class="teenager-adv main-screen-image" src="/img/icons/studying-thieunien-adv.gif")',
+               '    img(id="intro-academic-adv" class="academic-adv main-screen-image" src="/img/icons/studying-hocthuat-adv.gif")',
+               '    img(id="intro-reflection-adv" class="reflection-adv main-screen-image" src="/img/icons/studying-phanxa-adv.gif")',
+               '    img(id="intro-communication-adv" class="communication-adv main-screen-image" src="/img/icons/studying-giaotiep-adv.gif")',
                'a(href="/login")',
                '  div(id="login-icon")'
   );
@@ -73,6 +84,7 @@ ScreenMain.start = function() {
   });
   var menus = ScreenMain.screen.getElementsByClassName('display-menu');
   ScreenMain.imageAdvHolder = ScreenMain.screen.querySelector('#intro-image');
+  ScreenMain.currentIntroImage = ScreenMain.screen.querySelector('#intro-home-adv');
   for (var i = 0; i < menus.length; i++) {
     Button.enable(menus[i], function(e) {
       if (Menu.activeMenu != null && Menu.activeMenu.id == e.id) {
@@ -157,17 +169,24 @@ ScreenMain.start = function() {
 };
 
 ScreenMain.changeIntroImage = function(id) {
-  var introImage = ScreenMain.screen.querySelector('#intro-image')
-  introImage.style.bottom = '-100%';
+  var oldIntro = ScreenMain.currentIntroImage;
+  ScreenMain.currentIntroImage = ScreenMain.screen.querySelector('#intro-' + id + '-adv');
   ScreenMain.imageAdvHolder.className = id + '-intro';
-  if (IMG_LEFT_POS[id + '-adv']) {
-    ScreenMain.imageAdvHolder.firstChild.src = IMG_LEFT_POS[id + '-adv'].image;
+  var number = Math.floor((Math.random()*10)+1);
+  if (number % 2 == 0) {
+    $(oldIntro).stop().animate({'bottom': '-100%', 'opacity': 0}, 1000);
+  } else {
+    $(oldIntro).stop().animate({'left': '1000px', 'opacity': 0}, 1000);
   }
-  ScreenMain.imageAdvHolder.style.left = calculateImagePos(id + '-adv');
-  $(introImage).stop().animate({
-    bottom: 0
-  }, 1000);
-}
+  if (IMG_LEFT_POS[id+'-adv']) {
+    var value = $(window).width() - $(ScreenMain.currentIntroImage).width() - IMG_LEFT_POS[id+'-adv'].left;
+    if (value < IMG_LEFT_POS[id+'-adv'].min) {
+      value = IMG_LEFT_POS[id+'-adv'].min;
+    }
+    $('#intro-image').css('left', value + 'px');
+    $(ScreenMain.currentIntroImage).stop().animate({'bottom': '0', 'left': 0, 'opacity': 1}, 1000);
+  }
+};
 
 ScreenMain.initImageSlider = function(images, type) {
   var imagesDiv = '';

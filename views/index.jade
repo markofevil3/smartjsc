@@ -48,12 +48,12 @@ html
             }
           }
         }
-        var img = document.getElementById('intro-image').firstChild;
-        if (img.width != null && IMG_LEFT_POS[img.className]) {
-          // var value = console.log($(img).offset().left);
-          var value = $(window).width() - img.width - IMG_LEFT_POS[img.className].left;
-          if (value < IMG_LEFT_POS[img.className].min) {
-            value = IMG_LEFT_POS[img.className].min;
+        var img = ScreenMain.currentIntroImage;
+        var className = img.className.replace(' main-screen-image', '');
+        if (img.width != null && IMG_LEFT_POS[className]) {
+          var value = $(window).width() - img.width - IMG_LEFT_POS[className].left;
+          if (value < IMG_LEFT_POS[className].min) {
+            value = IMG_LEFT_POS[className].min;
           }
           $('#intro-image').css('left', value + 'px');
         }

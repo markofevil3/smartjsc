@@ -255,6 +255,7 @@ body {
     bottom: 0;
     height: 80%;
     width: 100%;
+    overflow: hidden;
 
     #footer-image {
       width: 24em;
@@ -269,9 +270,17 @@ body {
     #intro-image {
       position: absolute;
       bottom: 0;
-      #main-screen-image {
+      .main-screen-image {
+        bottom: -100%;
+        position: absolute;
+/*        display: none;*/
         height: 100%;
       }
+/*      #intro-home-adv {
+        bottom: 0;
+        position: absolute;
+        display: none;
+      }*/
     }
   }
   
@@ -313,6 +322,9 @@ body {
 }
 .communication-intro {
   height: 90%;
+}
+.kindergarten-intro , .pioneer-intro, .teenager-intro, .reflection-intro {
+  height: 100%;
 }
 
 /*#screen-question {*/

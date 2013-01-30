@@ -314,13 +314,14 @@ Menu.showAll = function() {
   for (var i = 0; i < otherMenus.length; i++) {
     bindMouseOver(otherMenus[i]);
   }
-  ScreenMain.imageAdvHolder.style.bottom = '-100%';
-  ScreenMain.imageAdvHolder.className = 'home-intro';
-  ScreenMain.imageAdvHolder.firstChild.src = IMG_LEFT_POS['home-adv'].image;
-  ScreenMain.imageAdvHolder.style.left = calculateImagePos('home-adv');
-  $(ScreenMain.imageAdvHolder).stop().animate({
-    bottom: 0
-  }, 1000);
+  ScreenMain.changeIntroImage('home');
+  // ScreenMain.imageAdvHolder.className = 'home-intro';
+  // ScreenMain.imageAdvHolder.style.left = calculateImagePos('home-adv');
+  // $("div.main-screen-image:not(#intro-" + id + "-adv)").stop().fadeOut('slow');
+  // $(ScreenMain.currentIntroImage).stop().fadeOut('slow');
+  // $('#intro-home-adv').stop().fadeIn('slow', function() {
+  //   // ScreenMain.currentIntroImage = this;
+  // });
   // $(ScreenMain.imageAdvHolder).hide().slideDown('fast');
 };
 
@@ -348,13 +349,14 @@ Menu.showOther = function(menu, callback) {
   for (var i = 0; i < otherMenus.length; i++) {
     bindMouseOver(otherMenus[i]);
   }
-  ScreenMain.imageAdvHolder.style.bottom = '-100%';
-  ScreenMain.imageAdvHolder.className = 'home-intro';
-  ScreenMain.imageAdvHolder.firstChild.className = 'home-adv';
-  ScreenMain.imageAdvHolder.style.left = calculateImagePos('home-adv');
-  $(ScreenMain.imageAdvHolder).stop().animate({
-    bottom: 0
-  }, 1000);
+  ScreenMain.changeIntroImage('home');
+  // ScreenMain.imageAdvHolder.className = 'home-intro';
+  // ScreenMain.imageAdvHolder.style.left = calculateImagePos('home-adv');
+  // // $("div.main-screen-image:not(#intro-" + id + "-adv)").stop().fadeOut('slow');
+  // // $(ScreenMain.currentIntroImage).stop().fadeOut('slow');
+  // $('#intro-home-adv').stop().fadeIn('slow', function() {
+  //   // ScreenMain.currentIntroImage = this;
+  // });
   $(menu).parent().stop().animate({height:'45%'},{queue:false, duration:500, easing: 'easeOutCubic', complete: function() {
     if (callback) {
       callback();
@@ -369,9 +371,6 @@ Menu.showMenuBar = function(menu, callback) {
     $('#gallery-inside').animate({width: '18.5em', height: '95%'},{queue:false, duration:500, easing: 'easeOutExpo'});
     Menu.activeMenuBar = $('#gallery-inside');
   } else {
-    // if (menu.id == 'studying') {
-    //   document.body.style.width = '1330px';
-    // }
     Menu.activeMenuBar = $(menu).parent().find('#'+ menu.id + '-inside-cate');
     Menu.activeMenuBar.css('marginLeft', '-5em').animate({width: $(document).width() + 'px'},{queue:false, duration:500, easing: 'easeOutExpo'});
   }
@@ -429,6 +428,7 @@ Menu.enableButtons = function(menu) {
             $('#item-title').html(json.data.title);
             $('#item-full-des').html(json.data.content);
           }
+          // ScreenMain.changeIntroImage($(div).attr('id'));
           ScreenMain.changeIntroImage($(div).attr('id'));
           Button.enable(ScreenMain.screen.querySelector("#close-button"), function() {
             $('#item-content').hide('slow');
