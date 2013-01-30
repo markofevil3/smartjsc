@@ -15,7 +15,7 @@ set :repository_cache, "git_cache"
 set :deploy_via, :remote_cache
 # set :ssh_options, { :forward_agent => true }
 
-set :smartjsc_server, "ec2-54-251-45-255.ap-southeast-1.compute.amazonaws.com"
+set :smartjsc_server, "ec2-54-251-73-184.ap-southeast-1.compute.amazonaws.com"
 role :app, smartjsc_server
 
 namespace :smartjsc do
