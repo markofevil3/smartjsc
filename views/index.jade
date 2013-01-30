@@ -58,7 +58,7 @@ html
           $('#intro-image').css('left', value + 'px');
         }
       }
-      Popup.openLoading(document.body);
+      // Popup.openLoading(document.body);
       var LANG = '#{lang}';
       var GALLERY = !{JSON.stringify(galleries)};
       var PRELOAD_ICONS = !{JSON.stringify(imageFiles)};
@@ -69,6 +69,6 @@ html
       }
       preloadImage(galleryThumbnails, null);
       preloadImage(PRELOAD_ICONS, 'icons', function() {
-        Popup.close();
-        ScreenManager.setScreen('main');
-      });      
+        // Popup.close();
+      });
+      ScreenManager.setScreen('main');
