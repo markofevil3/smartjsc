@@ -25,7 +25,7 @@ app.configure(function() {
   app.use(express.cookieParser());  
   app.use(express.session({
     secret: '076ee61d63aa10a125ea872411e433b9',
-    cookie: {maxAge: 3600000},
+    cookie: {maxAge: 43200000},
     store: new MongoStore({db: 'smartjsc', clear_interval: 1})
   }));
   app.use(app.router);
