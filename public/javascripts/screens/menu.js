@@ -199,7 +199,9 @@ Menu.hamlMenu =
                '      div(class="display-text")',
                '        div(id="camping-text" class="text" style="color:#4f4f4f") #{camping}',
                '      div(id="number" class="number-icon number06")',
-               '    div(id="camping-inside-cate", class="camping inside-cate")',
+               // '    div(id="camping-inside-cate", class="camping inside-cate")',
+               '    div(id="camping-inside-cate")',
+               '      div(id="camping-content-wrap") #{campingContent}',
                //### gallery
                '  li(class="cate" style="z-index: 4")',
                '    div(id="gallery" class="gallery display-menu")',
@@ -274,6 +276,7 @@ Menu.initMenu = function() {
     });
   }
   Menu.lang[index].rows = rows;
+  Menu.lang[index].campingContent = WebData.CONTENT.camping;
   menu.haml = Menu.hamlMenu(Menu.lang[index]);
   menu.div = createNode(menu.haml);
   Menu.menu = menu;
@@ -315,14 +318,6 @@ Menu.showAll = function() {
     bindMouseOver(otherMenus[i]);
   }
   ScreenMain.changeIntroImage('home');
-  // ScreenMain.imageAdvHolder.className = 'home-intro';
-  // ScreenMain.imageAdvHolder.style.left = calculateImagePos('home-adv');
-  // $("div.main-screen-image:not(#intro-" + id + "-adv)").stop().fadeOut('slow');
-  // $(ScreenMain.currentIntroImage).stop().fadeOut('slow');
-  // $('#intro-home-adv').stop().fadeIn('slow', function() {
-  //   // ScreenMain.currentIntroImage = this;
-  // });
-  // $(ScreenMain.imageAdvHolder).hide().slideDown('fast');
 };
 
 Menu.hideOther = function(menu) {
@@ -350,13 +345,6 @@ Menu.showOther = function(menu, callback) {
     bindMouseOver(otherMenus[i]);
   }
   ScreenMain.changeIntroImage('home');
-  // ScreenMain.imageAdvHolder.className = 'home-intro';
-  // ScreenMain.imageAdvHolder.style.left = calculateImagePos('home-adv');
-  // // $("div.main-screen-image:not(#intro-" + id + "-adv)").stop().fadeOut('slow');
-  // // $(ScreenMain.currentIntroImage).stop().fadeOut('slow');
-  // $('#intro-home-adv').stop().fadeIn('slow', function() {
-  //   // ScreenMain.currentIntroImage = this;
-  // });
   $(menu).parent().stop().animate({height:'45%'},{queue:false, duration:500, easing: 'easeOutCubic', complete: function() {
     if (callback) {
       callback();
@@ -367,30 +355,45 @@ Menu.showOther = function(menu, callback) {
 Menu.showMenuBar = function(menu, callback) {
   Menu.activeMenu = menu;
   Menu.enableButtons(menu);
-  if (menu.id == 'gallery') {
-    $('#gallery-inside').animate({width: '18.5em', height: '95%'},{queue:false, duration:500, easing: 'easeOutExpo'});
-    Menu.activeMenuBar = $('#gallery-inside');
-  } else {
-    Menu.activeMenuBar = $(menu).parent().find('#'+ menu.id + '-inside-cate');
-    Menu.activeMenuBar.css('marginLeft', '-5em').animate({width: $(document).width() + 'px'},{queue:false, duration:500, easing: 'easeOutExpo'});
+  switch (menu.id) {
+    case 'gallery':
+      $('#gallery-inside').animate({width: '18.5em', height: '95%'},{queue:false, duration:500, easing: 'easeOutExpo'});
+      Menu.activeMenuBar = $('#gallery-inside');
+      break;
+    case 'camping':
+      $('#camping-inside-cate').fadeIn('slow');
+      Menu.activeMenuBar = $('#camping-inside-cate');
+      break
+    default:
+      Menu.activeMenuBar = $(menu).parent().find('#'+ menu.id + '-inside-cate');
+      Menu.activeMenuBar.css('marginLeft', '-5em').animate({width: $(document).width() + 'px'},{queue:false, duration:500, easing: 'easeOutExpo'});
   }
   unbindMouseOver(menu.parentNode);
 };
 
 Menu.hideMenuBar = function(menu, callback) {
   bindMouseOver(menu.parentNode);
-  if (menu.id == 'gallery' || Menu.activeMenuBar.attr('id') == 'gallery-inside') {
-    $('#gallery-inside').animate({width: '0', height: '0'},{queue:false, duration:500, easing: 'easeOutExpo', complete: function() {
-      if (callback) {
-        callback();
-      }
-    }})
-  } else {
-    Menu.activeMenuBar.animate({width: '0'},{queue:false, duration:500, easing: 'easeOutExpo', complete: function() {
-      if (callback) {
-        callback();
-      }
-    }}).css('marginLeft', '0');
+  switch (Menu.activeMenuBar.attr('id')) {
+    case 'gallery-inside':
+      $('#gallery-inside').animate({width: '0', height: '0'},{queue:false, duration:500, easing: 'easeOutExpo', complete: function() {
+        if (callback) {
+          callback();
+        }
+      }});
+      break;
+    case 'camping-inside-cate':
+      $('#camping-inside-cate').fadeOut('slow', function() {
+        if (callback) {
+          callback();
+        }
+      });
+      break;
+    default:
+      Menu.activeMenuBar.animate({width: '0'},{queue:false, duration:500, easing: 'easeOutExpo', complete: function() {
+        if (callback) {
+          callback();
+        }
+      }}).css('marginLeft', '0');
   }
 };
 

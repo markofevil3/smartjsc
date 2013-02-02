@@ -21,7 +21,12 @@ var IMG_LEFT_POS = {
 };
 
 ScreenMain.hamlScreen =
-  Haml.compile('div(id="menu-holder")',
+  Haml.compile('div(id="lang-bar")',
+               '  a(href="/?lang=vn")',
+               '    img(src="/img/icons/lang-vn.png" class="lang-icon")',
+               '  a(href="/?lang=en")',
+               '    img(src="/img/icons/lang-en.png" class="lang-icon")',
+               'div(id="menu-holder")',
                '  | #{menu}',
                'div(id="middle-panel-wrap")',
                '  div(id="content")',
@@ -107,9 +112,18 @@ ScreenMain.start = function() {
             $('#content-wrap').html(WebData.CONTENT[e.id]);
             break;
           case 'camping':
-            Menu.hideOther(e);
-            $('#content').slideDown();
-            $('#content-wrap').html(WebData.CONTENT[e.id]);
+            // Menu.hideOther(e);
+            // $('#content').slideDown();
+            // $('#content-wrap').html(WebData.CONTENT[e.id]);
+            if (Menu.activeMenu && Menu.activeMenu.id != e.id && Menu.activeMenuBar != null) {
+              $(Menu.activeMenu).parent().stop().animate({height:'23%'},{queue:false, duration:500, easing: 'easeOutBounce'});
+              $(Menu.activeMenu).find('#number').animate({'top': '-5.5em'});
+              Menu.hideMenuBar(Menu.activeMenu);
+              Menu.showOther(e);
+              Menu.showMenuBar(e);
+            } else {
+              Menu.showMenuBar(e);
+            }
             ajax('/campingImages', {
               timeStamp: Date.now()
             },
@@ -141,7 +155,6 @@ ScreenMain.start = function() {
             }
             break;
           case 'news':
-            // Menu.hideAll();
             Menu.hideAll(function() {
               ScreenManager.setScreen('news');
             });
@@ -198,7 +211,7 @@ ScreenMain.initImageSlider = function(images, type) {
   if (type == 'gallery') {
     imageSlider.className = 'gallery-image-slider';
   } else {
-    imageSlider.className = '';
+    imageSlider.className = 'camping-image-slider';
   }
   imageSlider.style.height = $(window).height() - 80 + 'px';
   imageSlider.innerHTML = slider;
@@ -215,7 +228,9 @@ ScreenMain.initImageSlider = function(images, type) {
 };
 
 ScreenMain.removeImageSlider = function() {
-  ScreenMain.screen.querySelector("#image-slider").innerHTML = '';
+  var imageSlider = ScreenMain.screen.querySelector("#image-slider");
+  imageSlider.style.height = 0;
+  imageSlider.innerHTML = '';
 };
 
 ScreenMain.handleFormSubmit = function(form) {

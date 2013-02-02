@@ -154,10 +154,28 @@ body {
   position: absolute !important;
   margin-left: 60% !important;
 }
+.camping-image-slider {
+  position: absolute !important;
+  margin-left: 60% !important;
+}
 
 #screen-main {
   width: 100%;
   height: 100%;
+  
+  #lang-bar {
+    width: 5em;
+    position: absolute;
+    height: 2.5em;
+    
+    .lang-icon {
+      position: relative;
+      width: 50%;
+      height: 100%;
+      z-index: 999;
+      margin-top: -0.3em;
+    }
+  }
   
   #menu-holder {
     width: 15em;
@@ -637,8 +655,6 @@ body {
           .background-size(100% 100%);
           position: absolute;
           left: 50%;
-/*          top: 50%;*/
-/*          margin-top: -1em;*/
           margin-left: -1em;
           bottom: 0.35em;
         }
@@ -648,13 +664,10 @@ body {
         width: 55%;
         height: 100%;
         float: left;
-/*        display: table;*/
         position: relative;
         
         .text {
           text-align: left;
-/*          display: table-cell;*/
-/*          vertical-align: middle;*/
           font-weight: bold;
           position: absolute;
           bottom: 0.8em;
@@ -670,7 +683,27 @@ body {
         float: right;
       }
     }
+    
+    #camping-inside-cate {
+      width: 40%;
+      min-width: 17em;
+      background-color: #fff;
+      position: relative;
+      margin-left: 15.2em;
+      float: left;
+      display: none;
+      .rounded-corners(6px);
+      text-align: left;
+      color: #000;
 
+      #camping-content-wrap {
+        width: 90%;
+        position: relative;
+        margin: 5% auto 5% auto;
+        font: none !important;
+      }
+    }
+    
     .inside-cate {
       width: 0;
       height: 101%;
@@ -685,12 +718,9 @@ body {
         width: 0;
         background-color: #fff;
         position: absolute;
-/*        float: left;*/
-/*        margin-right: 0.1em;*/
         left: 6em;
         z-index: 30;
         .rounded-corners(5px);
-/*        margin-left: -0.3em;*/
         display: none;
         
         .top-des {

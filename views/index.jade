@@ -49,13 +49,15 @@ html
           }
         }
         var img = ScreenMain.currentIntroImage;
-        var className = img.className.replace(' main-screen-image', '');
-        if (img.width != null && IMG_LEFT_POS[className]) {
-          var value = $(window).width() - img.width - IMG_LEFT_POS[className].left;
-          if (value < IMG_LEFT_POS[className].min) {
-            value = IMG_LEFT_POS[className].min;
+        if (img != null) {
+          var className = img.className.replace(' main-screen-image', '');
+          if (img.width != null && IMG_LEFT_POS[className]) {
+            var value = $(window).width() - img.width - IMG_LEFT_POS[className].left;
+            if (value < IMG_LEFT_POS[className].min) {
+              value = IMG_LEFT_POS[className].min;
+            }
+            $('#intro-image').css('left', value + 'px');
           }
-          $('#intro-image').css('left', value + 'px');
         }
       }
       // Popup.openLoading(document.body);
