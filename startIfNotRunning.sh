@@ -4,9 +4,9 @@ if [ "$mongo" != '1' ]
 then
   # process not found, restart mongo and node
   if
-    cd ~/home/ec2-user/www/smartjsc/
+    cd ~/www/smartjsc/
   then
-    echo "`date` Restarting killed mongo process." >> ~/home/ec2-user/www/smartjsc/production.log 2>&1 &
+    echo "`date` Restarting killed mongo process." >> ~/www/smartjsc/production.log 2>&1 &
     mongod --dbpath ~/mongodb/data >> production.log 2>&1 &
   else
     echo "Could not locate current directory."
@@ -25,9 +25,9 @@ if [ $? -eq 1 ]
 then
   # process not found
   if
-    cd ~/home/ec2-user/www/smartjsc/
+    cd ~/www/smartjsc/
   then
-    echo "`date` Restarting killed node process." >> ~/home/ec2-user/www/smartjsc/production.log 2>&1 &
+    echo "`date` Restarting killed node process." >> ~/www/smartjsc/production.log 2>&1 &
     /bin/sh ./start.sh >> production.log 2>&1 &
   else
     echo "Could not locate current directory."
