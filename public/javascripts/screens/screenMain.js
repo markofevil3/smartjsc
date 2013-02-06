@@ -21,12 +21,7 @@ var IMG_LEFT_POS = {
 };
 
 ScreenMain.hamlScreen =
-  Haml.compile('div(id="lang-bar")',
-               '  a(href="/?lang=vn")',
-               '    img(src="/img/icons/lang-vn.png" class="lang-icon")',
-               '  a(href="/?lang=en")',
-               '    img(src="/img/icons/lang-en.png" class="lang-icon")',
-               'div(id="menu-holder")',
+  Haml.compile('div(id="menu-holder")',
                '  | #{menu}',
                'div(id="middle-panel-wrap")',
                '  div(id="content")',
@@ -53,7 +48,12 @@ ScreenMain.hamlScreen =
                '    img(id="intro-reflection-adv" class="reflection-adv main-screen-image" src="/img/icons/studying-phanxa-adv.gif")',
                '    img(id="intro-communication-adv" class="communication-adv main-screen-image" src="/img/icons/studying-giaotiep-adv.gif")',
                'a(href="/login")',
-               '  div(id="login-icon")'
+               '  div(id="login-icon")',
+               'div(id="lang-bar")',
+               '  a(href="/?lang=vn")',
+               '    img(src="/img/icons/lang-vn.png" class="lang-icon")',
+               '  a(href="/?lang=en")',
+               '    img(src="/img/icons/lang-en.png" class="lang-icon")'
   );
 
 ScreenMain.hamlScreenContact =
