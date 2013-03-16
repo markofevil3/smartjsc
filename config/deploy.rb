@@ -28,6 +28,7 @@ namespace :smartjsc do
   task :start, :roles => :app do
     run "cd /home/ec2-user/www/smartjsc; mongod --dbpath ~/mongodb/data >> production.log 2>&1 &"
     run "cd /home/ec2-user/www/smartjsc; ./start.sh >> production.log 2>&1 &"
+    run "cd /home/ec2-user/www/cokhibachkhoa; sudo node app.js >> production.log 2>&1 &"
   end
 
   task :stop, :roles => :app do
