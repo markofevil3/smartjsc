@@ -7,7 +7,7 @@ Dim.isEnabled = false;
 Dim.enable = function() {
   if (!Dim.isEnabled) {
     document.body.appendChild(Dim.div);
-    Dim.div.style.height = (document.body.offsetWidth * 2) / 3 + 'px';
+    Dim.div.style.height = '100%';
     Dim.isEnabled = true;
   }
 };
@@ -20,5 +20,5 @@ Dim.disable = function() {
 };
 
 Dim.adjust = function(zDepth) {
-  Dim.div.style.cssText = 'height:' + (document.body.offsetWidth * 2) / 3 + 'px;';
+  Dim.div.style.cssText = 'height:100%;';
 }

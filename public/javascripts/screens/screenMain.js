@@ -81,6 +81,13 @@ ScreenMain.hamlImage =
                '  a(href="#{url}" rel="lightbox[roadtrip]")',
                '    img(src=#{url} class="slider-images")'
   );
+
+ScreenMain.hamlPopup = 
+  Haml.compile('div(id="popupOnMain" class="popup")',
+               '  div(id="popupContent")',
+               '    div(id="closeButton")',
+               '    img(src="/img/icons/popup.jpg" id="popupImage")'
+  );
   
 ScreenMain.start = function() {
   Menu.initMenu();
@@ -90,6 +97,11 @@ ScreenMain.start = function() {
   var menus = ScreenMain.screen.getElementsByClassName('display-menu');
   ScreenMain.imageAdvHolder = ScreenMain.screen.querySelector('#intro-image');
   ScreenMain.currentIntroImage = ScreenMain.screen.querySelector('#intro-home-adv');
+  var div = createNode(ScreenMain.hamlPopup());
+  Button.enable(div.querySelector("#closeButton"), function(e) {
+    Popup.close();
+  });
+  Popup.open(ScreenMain.screen, div);
   for (var i = 0; i < menus.length; i++) {
     Button.enable(menus[i], function(e) {
       if (Menu.activeMenu != null && Menu.activeMenu.id == e.id) {
