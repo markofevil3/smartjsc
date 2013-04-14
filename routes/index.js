@@ -20,6 +20,7 @@ var EMAIL_SERVER  = Email.server.connect({
 var ARTICLE_QUESTION = 1;
 var ARTICLE_NEWS = 2;
 var ARTICLE_STUDYING = 3;
+var ARTICLE_GO_ABROAD = 4;
 var GALLERY = 1;
 var CAMPING = 2;
 

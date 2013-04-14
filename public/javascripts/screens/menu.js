@@ -251,6 +251,20 @@ Menu.galleryHaml =
                '    div(class="bottom-des") #{title}'
   );
 
+Menu.schoolLogosHaml =
+  Haml.compile('div(id="#{schoolId}" class="logos" data-type="#{type}")',
+               '  img(src="/img/goAbroad/#{logoLink}")'
+  );
+
+Menu.popupSchoolContentHaml =
+  Haml.compile('div(id="popupSchool" class="popup")',
+               '  div(id="closeButton")',
+               '  div(id="popupSchoolContent")',
+               '    img(id="schoolLogo" src="/img/goAbroad/#{logoLink}")',
+               '    div(id="popupSchoolContentWrap")',
+               '      | #{content}'
+  );
+
 Menu.menu = null;
 Menu.activeMenu = null;
 Menu.activeMenuBar = null;
@@ -397,6 +411,40 @@ Menu.hideMenuBar = function(menu, callback) {
   }
 };
 
+Menu.showDynamicContent = function(type) {
+  ScreenMain.introImage.style.display = "none";
+  ScreenMain.dynamicContentArrow.style.left = WebData.GO_ABROAD_CONTENT[type].arrowPos + 'em';
+  ScreenMain.dynamicContent.querySelector("#display-content-wrap").innerHTML = WebData.GO_ABROAD_CONTENT[type].content;
+  var logos = '';
+  for (var i = 0; i < WebData.GO_ABROAD_CONTENT[type].schools.length; i++) {
+    var school = WebData.GO_ABROAD_CONTENT[type].schools[i];
+    logos += Menu.schoolLogosHaml({
+      schoolId: school.id,
+      logoLink: type + '/' + school.image,
+      type: type
+    });
+  }
+  ScreenMain.dynamicContent.querySelector("#school-logos").innerHTML = logos;
+  var logoDivs = ScreenMain.dynamicContent.getElementsByClassName("logos");
+  for (var i = 0; i < logoDivs.length; i++) {
+    Button.enable(logoDivs[i], Menu.showSchoolContent);
+  }
+  ScreenMain.dynamicContent.style.display = 'block';
+}
+
+Menu.showSchoolContent = function(e) {
+  var schoolType = e.getAttribute("data-type");
+  var schoolId = e.id;
+  var div = createNode(Menu.popupSchoolContentHaml({
+    logoLink: schoolType + '/' + WebData.SCHOOL_CONTENT[schoolId].image,
+    content: WebData.SCHOOL_CONTENT[schoolId].content
+  }));
+  Button.enable(div.querySelector("#closeButton"), function() {
+    Popup.close();
+  });
+  Popup.open(ScreenMain.screen, div);
+};
+
 Menu.enableButtons = function(menu) {
   switch(menu.id) {
     case 'go-abroad':
@@ -404,6 +452,14 @@ Menu.enableButtons = function(menu) {
         Menu.hideAll(function() {
           ScreenManager.setScreen('question');
         });
+      });
+      $("#canada").click(function() {
+        // alert('canada');
+        Menu.showDynamicContent('canada');
+      });
+      $("#singapore").click(function() {
+        // alert('singapore');
+        Menu.showDynamicContent('singapore');
       });
       break;
     case 'gallery':

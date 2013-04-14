@@ -4,6 +4,9 @@ ScreenMain.screen = document.createElement('div');
 ScreenMain.screen.id = 'screen-main';
 ScreenMain.imageAdvHolder = null;
 ScreenMain.currentIntroImage = null;
+ScreenMain.dynamicContent = null;
+ScreenMain.dynamicContentArrow = null;
+ScreenMain.introImage = null;
 
 var IMG_LEFT_POS = {
   'home-adv': {'left': 100, 'min': 353, 'width': 400, 'image': '/img/icons/home-adv.png'},
@@ -24,6 +27,17 @@ ScreenMain.hamlScreen =
   Haml.compile('div(id="menu-holder")',
                '  | #{menu}',
                'div(id="middle-panel-wrap")',
+               '  div(id="dynamic-content")',
+               '    div(id="top-arrow")',
+               '    div(id="display-content")',
+               '      div(id="display-content-wrap")',
+               '    div(id="school-logos")',
+               '      div(class="logos")',
+               '        img(src="/img/goAbroad/canada/burnary.png")',
+               '      div(class="logos")',
+                '        img(src="/img/goAbroad/canada/burnary.png")',
+                '      div(class="logos")',
+                 '        img(src="/img/goAbroad/canada/burnary.png")',
                '  div(id="content")',
                '    div(id="content-wrap")',
                '  div(id="item-content")',
@@ -97,6 +111,9 @@ ScreenMain.start = function() {
   var menus = ScreenMain.screen.getElementsByClassName('display-menu');
   ScreenMain.imageAdvHolder = ScreenMain.screen.querySelector('#intro-image');
   ScreenMain.currentIntroImage = ScreenMain.screen.querySelector('#intro-home-adv');
+  ScreenMain.dynamicContent = ScreenMain.screen.querySelector('#dynamic-content');
+  ScreenMain.dynamicContentArrow = ScreenMain.screen.querySelector('#top-arrow');
+  ScreenMain.introImage = ScreenMain.screen.querySelector("#intro-image");
   var div = createNode(ScreenMain.hamlPopup());
   Button.enable(div.querySelector("#closeButton"), function(e) {
     Popup.close();
@@ -116,6 +133,7 @@ ScreenMain.start = function() {
         if (Menu.activeMenuBar != null) {
           Menu.hideMenuBar(e);
         }
+        ScreenMain.dynamicContent.style.display = 'none';
       } else {
         switch(e.id) {
           case 'about':
@@ -156,6 +174,8 @@ ScreenMain.start = function() {
           case 'links':
           case 'go-abroad':
           case 'studying':
+            ScreenMain.dynamicContent.style.display = 'none';
+            ScreenMain.introImage.style.display = "block";
             if (Menu.activeMenu && Menu.activeMenu.id != e.id && Menu.activeMenuBar != null) {
               $(Menu.activeMenu).parent().stop().animate({height:'23%'},{queue:false, duration:500, easing: 'easeOutBounce'});
               $(Menu.activeMenu).find('#number').animate({'top': '-5.5em'});
