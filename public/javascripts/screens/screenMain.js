@@ -100,7 +100,8 @@ ScreenMain.hamlPopup =
   Haml.compile('div(id="popupOnMain" class="popup")',
                '  div(id="popupContent")',
                '    div(id="closeButton")',
-               '    img(src="/img/icons/popup.jpg" id="popupImage")'
+               '    img(src="/img/icons/popup.jpg" id="popupImage" class="popupImages")',
+               '    img(src="/img/icons/popup2.jpg" id="popupImage" class="popupImages")'
   );
   
 ScreenMain.start = function() {
