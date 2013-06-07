@@ -87,11 +87,18 @@ Menu.hamlMenu =
                '            div(class="number-des") 02',
                '            div(class="icon-des leaf")',
                '          div(class="bottom-des") canada',
+               '      div(id="england" class="sub-menu")',
+               '        div(class="england sub-menu-icon")',
+               '        div(id="england-des" class="description")',
+               '          div(class="top-des")',
+               '            div(class="number-des") 03',
+               '            div(class="icon-des leaf")',
+               '          div(class="bottom-des") england',
                '      div(id="question" class="sub-menu")',
                '        div(class="question sub-menu-icon")',
                '        div(id="question-des" class="description")',
                '          div(class="top-des")',
-               '            div(class="number-des") 03',
+               '            div(class="number-des") 04',
                '            div(class="icon-des leaf")',
                '          div(class="bottom-des") #{questions}',
                //### studying
@@ -412,6 +419,7 @@ Menu.hideMenuBar = function(menu, callback) {
 };
 
 Menu.showDynamicContent = function(type) {
+  console.log("here");
   ScreenMain.introImage.style.display = "none";
   ScreenMain.dynamicContentArrow.style.left = WebData.GO_ABROAD_CONTENT[type].arrowPos + 'em';
   ScreenMain.dynamicContent.querySelector("#display-content-wrap").innerHTML = WebData.GO_ABROAD_CONTENT[type].content;
@@ -460,6 +468,10 @@ Menu.enableButtons = function(menu) {
       $("#singapore").click(function() {
         // alert('singapore');
         Menu.showDynamicContent('singapore');
+      });
+      $("#england").click(function() {
+        // alert('singapore');
+        Menu.showDynamicContent('england');
       });
       break;
     case 'gallery':
