@@ -115,11 +115,11 @@ ScreenMain.start = function() {
   ScreenMain.dynamicContent = ScreenMain.screen.querySelector('#dynamic-content');
   ScreenMain.dynamicContentArrow = ScreenMain.screen.querySelector('#top-arrow');
   ScreenMain.introImage = ScreenMain.screen.querySelector("#intro-image");
-  var div = createNode(ScreenMain.hamlPopup());
-  Button.enable(div.querySelector("#closeButton"), function(e) {
-    Popup.close();
-  });
-  Popup.open(ScreenMain.screen, div);
+  // var div = createNode(ScreenMain.hamlPopup());
+  // Button.enable(div.querySelector("#closeButton"), function(e) {
+  //   Popup.close();
+  // });
+  // Popup.open(ScreenMain.screen, div);
   for (var i = 0; i < menus.length; i++) {
     Button.enable(menus[i], function(e) {
       if (Menu.activeMenu != null && Menu.activeMenu.id == e.id) {
