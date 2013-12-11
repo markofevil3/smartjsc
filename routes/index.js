@@ -112,7 +112,7 @@ exports.contact = function(req, res) {
   EMAIL_SERVER.send({
     text:    message, 
     from:    EMAIL,
-    to:      EMAIL,
+    to:      "yen@smartjsc.com",
     subject: "Message from website"
   }, function(err, message) { 
     if (err) {
